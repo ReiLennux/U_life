@@ -1,4 +1,4 @@
-package mx.com.u_life.ui.theme
+package mx.com.u_life.presentation.theme
 
 import androidx.compose.ui.graphics.Color
 
