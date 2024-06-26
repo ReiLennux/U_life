@@ -3,8 +3,10 @@ package mx.com.u_life.presentation.screens
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import mx.com.u_life.presentation.enums.Routes
 import mx.com.u_life.presentation.navigation.BottomNavBar
@@ -20,25 +22,31 @@ fun MainScreen() {
     AppContent()
 }
 
+@Preview
 @Composable
 fun AppContent() {
     val navController = rememberNavController()
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentRoute = navBackStackEntry?.destination?.route
+
     Scaffold(
-        topBar = { TopAppBar() },
-        bottomBar = { BottomNavBar( navController ) },
+        topBar = {
+                    TopAppBar(visible = currentRoute != Routes.HOME.name )
+        },
+        bottomBar = { BottomNavBar(navController) },
     ) { paddingValues ->
         NavHost(
             navController = navController,
             startDestination = Routes.HOME.name,
             modifier = Modifier.padding(paddingValues)
         ) {
-            composable(route = Routes.HOME.name){
+            composable(route = Routes.HOME.name) {
                 HomeScreen()
             }
-            composable(route = Routes.CHATS.name){
+            composable(route = Routes.CHATS.name) {
                 ChatsScreen()
             }
-            composable(route = Routes.PROFILE.name){
+            composable(route = Routes.PROFILE.name) {
                 ProfileScreen()
             }
         }
