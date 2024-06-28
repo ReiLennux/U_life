@@ -1,5 +1,7 @@
 package mx.com.u_life.presentation.components
 
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -13,6 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import mx.com.u_life.R
@@ -32,8 +35,8 @@ import mx.com.u_life.R
 @Composable
 fun GenericOutlinedButton(
     modifier: Modifier = Modifier,
-    text: String? = null,
-    icon: Painter? = null,
+    @StringRes text: Int? = null,
+    @DrawableRes icon: Int? = null,
     shape: Shape = RoundedCornerShape(50.dp),
     onClick: () -> Unit,
     backgroundColor: Color = Color.Transparent,
@@ -51,7 +54,7 @@ fun GenericOutlinedButton(
         // Icono del botón, si está presente
         icon?.let {
             Icon(
-                painter = icon,
+                painter = painterResource(id = icon),
                 contentDescription = null,
                 modifier = Modifier.width(24.dp)
             )
@@ -62,7 +65,7 @@ fun GenericOutlinedButton(
         text?.let {
             // Texto del botón
             Text(
-                text = text,
+                text = stringResource(id = text),
             )
         }
     }
@@ -72,7 +75,7 @@ fun GenericOutlinedButton(
 @Composable
 fun PreviewGenericOutlinedButton() {
     GenericOutlinedButton(
-        icon = painterResource(id = R.drawable.send_message),
+        icon = R.drawable.send_message,
         onClick = { /* Acción cuando se hace clic */ },
         backgroundColor = Color.LightGray,
         contentColor = Color.Black
