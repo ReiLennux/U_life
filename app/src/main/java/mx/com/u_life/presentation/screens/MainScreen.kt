@@ -5,7 +5,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import mx.com.u_life.presentation.enums.Routes
@@ -22,7 +21,6 @@ fun MainScreen() {
     AppContent()
 }
 
-@Preview
 @Composable
 fun AppContent() {
     val navController = rememberNavController()
@@ -41,13 +39,13 @@ fun AppContent() {
             modifier = Modifier.padding(paddingValues)
         ) {
             composable(route = Routes.HOME.name) {
-                HomeScreen()
+                HomeScreen(navController)
             }
             composable(route = Routes.CHATS.name) {
-                ChatsScreen()
+                ChatsScreen(navController)
             }
             composable(route = Routes.PROFILE.name) {
-                ProfileScreen()
+                ProfileScreen(navController)
             }
         }
     }
