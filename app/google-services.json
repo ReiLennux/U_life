@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "195711348507",
+    "project_id": "u-life-141b3",
+    "storage_bucket": "u-life-141b3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:195711348507:android:c336a5c2bfd8f36b50edbe",
+        "android_client_info": {
+          "package_name": "mx.com.u_life"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDi30Afc-4o-cTIKoEowxN7pOecRPRVvI8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
