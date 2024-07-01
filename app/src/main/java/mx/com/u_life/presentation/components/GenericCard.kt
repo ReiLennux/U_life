@@ -43,11 +43,11 @@ import mx.com.u_life.R
 
 @Composable
 fun GenericCard(
+    modifier: Modifier = Modifier,
     @StringRes title: Int,
     @StringRes description: Int,
     @DrawableRes icon: Int? = null,
-    content: @Composable () -> Unit,
-    modifier: Modifier = Modifier
+    content: @Composable () -> Unit
 ) {
     Card(
         modifier = modifier
@@ -71,7 +71,6 @@ fun GenericCard(
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(200.dp)
                         .clip(RoundedCornerShape(16.dp))
                 )
                 Spacer(modifier = Modifier.height(16.dp))
