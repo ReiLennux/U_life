@@ -1,5 +1,6 @@
 package mx.com.u_life.presentation.components
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
@@ -15,6 +16,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
@@ -36,13 +38,13 @@ import mx.com.u_life.R
  */
 
 @Composable
-fun TextFieldGeneric(
+fun GenericTextField(
     modifier: Modifier = Modifier,
     value: String,
     onValueChange: (String) -> Unit,
     leadingIcon: Painter? = null,
     keyboardType: KeyboardType = KeyboardType.Text,
-    placeholder: String,
+    @StringRes placeholder: Int,
     action: ImeAction = ImeAction.Default,
     errorMessage: String? = null
 ) {
@@ -50,7 +52,7 @@ fun TextFieldGeneric(
         value = value,
         onValueChange = { onValueChange(it) },
         modifier = modifier,
-        placeholder = { Text(text = placeholder) },
+        placeholder = { Text(text = stringResource(id = placeholder)) },
         keyboardOptions = KeyboardOptions.Default.copy(
             keyboardType = keyboardType,
             imeAction = action
@@ -82,7 +84,7 @@ fun PreviewTextFieldGeneric() {
     var errorMessage by remember { mutableStateOf<String?>(null) }
 
     Column {
-        TextFieldGeneric(
+        GenericTextField(
             value = textFieldValue,
             leadingIcon = painterResource(id = R.drawable.send_message),
             onValueChange = {
@@ -90,7 +92,7 @@ fun PreviewTextFieldGeneric() {
                 errorMessage = if (it.isEmpty()) "Este campo no puede estar vacío" else null
             },
             keyboardType = KeyboardType.Text,
-            placeholder = "Nombre de usuario",
+            placeholder = R.string.app_name,
             action = ImeAction.Done,
             errorMessage = errorMessage
         )

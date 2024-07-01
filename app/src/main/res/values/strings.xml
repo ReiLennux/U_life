@@ -5,4 +5,9 @@
     <string name="chats_card_description">Aqui apareceran tus chats con los propietarios de las rentas.</string>
     <string name="chats_card_Search">Buscar</string>
 
+    <!-- StringResources for Auth -->
+    <string name="auth_login_title">Iniciar sesión</string>
+    <string name="auth_login_email">Correo electrónico</string>
+    <string name="auth_login_password">Contraseña</string>
+
 </resources>
