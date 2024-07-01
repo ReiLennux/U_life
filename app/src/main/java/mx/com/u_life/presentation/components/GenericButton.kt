@@ -5,8 +5,10 @@ import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -68,6 +70,33 @@ fun GenericOutlinedButton(
                 text = stringResource(id = text),
             )
         }
+    }
+}
+
+/**
+ * Componente genérico para un botón simple personalizable en Jetpack Compose.
+ *
+ * @param text Texto que se mostrará en el botón.
+ * @param onClick La acción que se ejecutará cuando se haga clic en el botón.
+ * @param modifier Modificador opcional para personalizar la apariencia del botón.
+ */
+
+@Composable
+fun GenericSimpleButton(
+    modifier: Modifier = Modifier,
+    @StringRes text: Int,
+    onClick: () -> Unit
+){
+    Button(
+        modifier = modifier,
+        onClick =  onClick ,
+        colors = ButtonDefaults.buttonColors(
+            containerColor = MaterialTheme.colorScheme.primary
+        )
+    ) {
+        Text(
+            text = stringResource(id = text),
+        )
     }
 }
 

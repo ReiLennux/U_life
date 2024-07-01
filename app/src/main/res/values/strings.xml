@@ -3,6 +3,6 @@
     <!-- StringResources for chat -->
     <string name="chats_card_tittle">¡No hay nada aquí!</string>
     <string name="chats_card_description">Aqui apareceran tus chats con los propietarios de las rentas.</string>
-    <string name="chats_card_Search">Buscar!</string>
+    <string name="chats_card_Search">Buscar</string>
 
 </resources>
