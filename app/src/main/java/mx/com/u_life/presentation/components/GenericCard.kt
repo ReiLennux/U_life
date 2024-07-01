@@ -94,9 +94,7 @@ fun GenericCard(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.Center
             ) {
-                content?.let {
-                    content()
-                }
+                content()
             }
         }
     }
