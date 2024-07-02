@@ -37,7 +37,7 @@ fun ChatsContent(
                 title = R.string.chats_card_tittle,
                 description = R.string.chats_card_description,
                 content = { RedirectToSearch(navHostController) },
-                icon = R.drawable.person_searching
+                icon = R.drawable.img_person_searching
             )
         }
     }

@@ -98,6 +98,7 @@ dependencies {
 
     // LiveData
     implementation(libs.androidx.lifecycle.livedata.ktx)
+    implementation(libs.androidx.runtime.livedata)
 
     //Retrofit
     implementation(libs.retrofit)

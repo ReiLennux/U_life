@@ -9,5 +9,7 @@
     <string name="auth_login_title">Iniciar sesión</string>
     <string name="auth_login_email">Correo electrónico</string>
     <string name="auth_login_password">Contraseña</string>
+    <string name="auth_register_title">Registrarse</string>
+    <string name="auth_error_login">Error al iniciar sesión</string>
 
 </resources>

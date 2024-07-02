@@ -45,6 +45,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
+import mx.com.u_life.presentation.components.AppLogo
 import mx.com.u_life.presentation.enums.Routes
 
 @Composable
@@ -104,23 +105,7 @@ fun TopAppBar(visible : Boolean = true) {
                 .background(MaterialTheme.colorScheme.background),
             contentAlignment = Alignment.BottomStart
         ) {
-            Row(
-                modifier = Modifier.padding(15.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Icon(
-                    imageVector = Icons.Filled.AdsClick,
-                    contentDescription = "app-icon",
-                    Modifier.size(30.dp)
-                )
-                Spacer(modifier = Modifier.width(20.dp))
-                Text(
-                    "U Life",
-                    color = MaterialTheme.colorScheme.secondary,
-                    fontSize = 35.sp,
-                    fontWeight = FontWeight.Black
-                )
-            }
+            AppLogo()
             HorizontalDivider(
                 modifier = Modifier
                     .padding(top = 10.dp)

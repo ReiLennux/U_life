@@ -1,5 +1,6 @@
 package mx.com.u_life.presentation.components
 
+import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -42,7 +43,7 @@ fun GenericTextField(
     modifier: Modifier = Modifier,
     value: String,
     onValueChange: (String) -> Unit,
-    leadingIcon: Painter? = null,
+    @DrawableRes leadingIcon: Int? = null,
     keyboardType: KeyboardType = KeyboardType.Text,
     @StringRes placeholder: Int,
     action: ImeAction = ImeAction.Default,
@@ -61,7 +62,7 @@ fun GenericTextField(
         maxLines = 1,
         leadingIcon = leadingIcon?.let {
             {
-                Icon(painter = leadingIcon, contentDescription = "")
+                Icon(painter = painterResource(id = leadingIcon), contentDescription = "")
             }
         },
         isError = errorMessage != null,
@@ -86,7 +87,7 @@ fun PreviewTextFieldGeneric() {
     Column {
         GenericTextField(
             value = textFieldValue,
-            leadingIcon = painterResource(id = R.drawable.send_message),
+            leadingIcon = R.drawable.send_message,
             onValueChange = {
                 textFieldValue = it
                 errorMessage = if (it.isEmpty()) "Este campo no puede estar vacío" else null
