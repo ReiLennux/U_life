@@ -36,7 +36,7 @@ fun SignUpView(
                     viewModel.resetInitState()
                     Toast.makeText(
                         context,
-                        stringResource(id = R.string.auth_error_login),
+                        stringResource(id = R.string.auth_error_register),
                         Toast.LENGTH_LONG
                     ).show()
                 }

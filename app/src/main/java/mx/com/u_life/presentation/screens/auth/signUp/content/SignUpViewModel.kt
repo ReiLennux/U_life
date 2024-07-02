@@ -22,23 +22,25 @@ class SignUpViewModel @Inject constructor(
     // Variables
     private val _email = MutableLiveData("")
     val email: LiveData<String> = _email
-    val emailError = MutableLiveData(false)
 
     private val _password = MutableLiveData("")
     val password: LiveData<String> = _password
-    val passwordError = MutableLiveData(false)
+
+    private val _confirmPassword = MutableLiveData("")
+    val confirmPassword: LiveData<String> = _confirmPassword
+
+    private val _name = MutableLiveData("")
+    val name: LiveData<String> = _name
 
     fun resetInitState(){
         _isLoading.value = null
     }
 
-    fun onChanged(email: String, password: String){
-        if (email.isEmpty() || password.isEmpty()) {
-            emailError.value = _email.value.isNullOrEmpty()
-            passwordError.value = _password.value.isNullOrEmpty()
-        }
+    fun onChanged(email: String, password: String, confirmPassword: String, name: String){
         _email.value = email
         _password.value = password
+        _confirmPassword.value = confirmPassword
+        _name.value = name
     }
 
 }

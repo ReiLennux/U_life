@@ -28,9 +28,7 @@ fun AppContent() {
     val currentRoute = navBackStackEntry?.destination?.route
 
     Scaffold(
-        topBar = {
-                    TopAppBar(visible = currentRoute != Routes.HOME.name )
-        },
+        topBar = { TopAppBar(visible = currentRoute != Routes.HOME.name ) },
         bottomBar = { BottomNavBar(navController) },
     ) { paddingValues ->
         NavHost(

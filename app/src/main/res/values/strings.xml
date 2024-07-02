@@ -11,5 +11,8 @@
     <string name="auth_login_password">Contraseña</string>
     <string name="auth_register_title">Registrarse</string>
     <string name="auth_error_login">Error al iniciar sesión</string>
+    <string name="auth_error_register">Error al registrarse</string>
+    <string name="auth_register_name">Nombre</string>
+    <string name="auth_register_confirm_password">Confirmar contraseña</string>
 
 </resources>

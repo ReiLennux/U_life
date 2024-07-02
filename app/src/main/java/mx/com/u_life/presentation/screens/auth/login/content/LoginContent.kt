@@ -62,6 +62,7 @@ fun LoginForm(navHostController: NavHostController, viewModel: LoginViewModel) {
         AppLogo()
         HorizontalDivider()
         Spacer(modifier = Modifier.height(20.dp))
+        //Text Field for email
         GenericTextField(
             value = email,
             onValueChange = {
@@ -75,7 +76,7 @@ fun LoginForm(navHostController: NavHostController, viewModel: LoginViewModel) {
             action = ImeAction.Next
         )
         Spacer(modifier = Modifier.height(10.dp))
-
+        //Text Field for password
         PasswordTextField(
             value = password,
             onTextFieldChange = {
@@ -84,11 +85,12 @@ fun LoginForm(navHostController: NavHostController, viewModel: LoginViewModel) {
                     password = it
                 )
             },
-            painterResource = R.drawable.ic_password,
+            painterResource = R.drawable.ic_pass,
             placeholder = R.string.auth_login_password,
             action = ImeAction.Done
         )
         Spacer(modifier = Modifier.height(15.dp))
+        //Button for login
         GenericOutlinedButton(
             text = R.string.auth_login_title,
             backgroundColor = MaterialTheme.colorScheme.primary,

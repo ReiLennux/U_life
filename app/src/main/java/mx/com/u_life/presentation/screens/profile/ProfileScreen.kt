@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import mx.com.u_life.presentation.screens.auth.login.content.LoginContent
+import mx.com.u_life.presentation.screens.auth.signUp.content.SignUpContent
 import mx.com.u_life.presentation.screens.profile.content.ProfileContent
 
 @Composable
@@ -14,7 +15,8 @@ fun ProfileScreen(
     Scaffold(
         content = { innerPadding ->
             //ProfileContent(paddingValues = innerPadding, navHostController = navHostController)
-            LoginContent(paddingValues = innerPadding, navHostController = navHostController)
+            //LoginContent(paddingValues = innerPadding, navHostController = navHostController)
+            SignUpContent(paddingValues = innerPadding, navHostController = navHostController)
         }
     )
 }
