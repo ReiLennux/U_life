@@ -3,6 +3,7 @@ package mx.com.u_life.presentation.components
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Icon
@@ -52,7 +53,7 @@ fun GenericTextField(
     OutlinedTextField(
         value = value,
         onValueChange = { onValueChange(it) },
-        modifier = modifier,
+        modifier = modifier.fillMaxWidth(),
         placeholder = { Text(text = stringResource(id = placeholder)) },
         keyboardOptions = KeyboardOptions.Default.copy(
             keyboardType = keyboardType,

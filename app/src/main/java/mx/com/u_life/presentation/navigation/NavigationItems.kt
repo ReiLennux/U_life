@@ -9,16 +9,11 @@ import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
-import androidx.compose.material.icons.filled.AdsClick
 import androidx.compose.material.icons.filled.ChatBubble
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.outlined.AccountCircle
@@ -38,10 +33,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -49,45 +42,49 @@ import mx.com.u_life.presentation.components.AppLogo
 import mx.com.u_life.presentation.enums.Routes
 
 @Composable
-fun BottomNavBar(navController: NavHostController) {
-
-    NavigationBar(
-        containerColor = MaterialTheme.colorScheme.surface,
+fun BottomNavBar(navController: NavHostController, visible : Boolean) {
+    AnimatedVisibility(
+        visible = visible,
+        enter = slideInVertically() + expandVertically() + fadeIn(),
+        exit = slideOutVertically() + shrinkVertically() + fadeOut()
     ) {
-        val navBackStackEntry by navController.currentBackStackEntryAsState()
-        val currentDestination = navBackStackEntry?.destination
+        NavigationBar(
+            containerColor = MaterialTheme.colorScheme.surface,
+        ) {
+            val navBackStackEntry by navController.currentBackStackEntryAsState()
+            val currentDestination = navBackStackEntry?.destination
 
-        navigationItems.forEach { navItem ->
-            NavigationBarItem(
-                selected = currentDestination?.hierarchy?.any { it.route == navItem.route } == true,
-                onClick = {
-                    if (navController.currentDestination?.route != navItem.route) {
-                        navController.navigate(navItem.route) {
-                            launchSingleTop = true
-                            restoreState = true
+            navigationItems.forEach { navItem ->
+                NavigationBarItem(
+                    selected = currentDestination?.hierarchy?.any { it.route == navItem.route } == true,
+                    onClick = {
+                        if (navController.currentDestination?.route != navItem.route) {
+                            navController.navigate(navItem.route) {
+                                launchSingleTop = true
+                                restoreState = true
+                            }
                         }
-                    }
-                },
-                label = { Text(text = navItem.title) },
-                alwaysShowLabel = true,
-                icon = { BadgedBox(
-                    badge = {
-                        if (navItem.hasBadge != null){
-                            Badge { Text(text = navItem.hasBadge.toString()) }
-                        } else if (navItem.hasNews) {
-                            Badge()
+                    },
+                    label = { Text(text = navItem.title) },
+                    alwaysShowLabel = true,
+                    icon = { BadgedBox(
+                        badge = {
+                            if (navItem.hasBadge != null){
+                                Badge { Text(text = navItem.hasBadge.toString()) }
+                            } else if (navItem.hasNews) {
+                                Badge()
+                            }
                         }
-                    }
-                ) {
-                    Icon(
-                        imageVector = if (currentDestination?.hierarchy?.any { it.route == navItem.route } == true) {
-                            navItem.selectedIcon
-                        } else navItem.unselectedIcon, contentDescription = navItem.title)
-                } },
-            )
+                    ) {
+                        Icon(
+                            imageVector = if (currentDestination?.hierarchy?.any { it.route == navItem.route } == true) {
+                                navItem.selectedIcon
+                            } else navItem.unselectedIcon, contentDescription = navItem.title)
+                    } },
+                )
+            }
         }
     }
-
 }
 
 @Preview

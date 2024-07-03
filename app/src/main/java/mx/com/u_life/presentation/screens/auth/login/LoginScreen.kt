@@ -4,17 +4,17 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavHostController
+import androidx.navigation.NavController
 import mx.com.u_life.presentation.screens.auth.login.content.LoginContent
 import mx.com.u_life.presentation.screens.auth.login.content.LoginView
 
 @Composable
 fun LoginScreen(
-    navHostController: NavHostController
+    navController: NavController
 ) {
     Scaffold(
         content = { innerPadding ->
-            LoginContent(paddingValues = innerPadding, navHostController = navHostController)
+            LoginContent(paddingValues = innerPadding, navController = navController)
         }
     )
     LoginView(modifier = Modifier.fillMaxSize())

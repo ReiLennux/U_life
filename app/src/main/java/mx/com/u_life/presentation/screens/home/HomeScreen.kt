@@ -17,13 +17,13 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
+import androidx.navigation.NavController
 import mx.com.u_life.presentation.screens.home.content.HomeContent
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
-    navHostController: NavHostController
+    navController: NavController
 ) {
     Scaffold(
         topBar = {
@@ -47,7 +47,7 @@ fun HomeScreen(
             }
         },
         content = { innerPadding ->
-            HomeContent(paddingValues = innerPadding, navHostController = navHostController)
+            HomeContent(paddingValues = innerPadding, navController = navController)
         }
     )
 }

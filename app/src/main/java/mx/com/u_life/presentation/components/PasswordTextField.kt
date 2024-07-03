@@ -29,6 +29,7 @@ import mx.com.u_life.R
 
 @Composable
 fun PasswordTextField(
+    modifier: Modifier = Modifier,
     value: String,
     onTextFieldChange: (String) -> Unit,
     @DrawableRes painterResource: Int,
@@ -41,7 +42,7 @@ fun PasswordTextField(
     OutlinedTextField(
         value = value,
         onValueChange = {onTextFieldChange(it)},
-        modifier = Modifier,
+        modifier = modifier.fillMaxWidth(),
         placeholder = { Text(text = stringResource(id = placeholder))},
         keyboardOptions = KeyboardOptions.Default.copy(
             keyboardType = KeyboardType.Text,

@@ -100,13 +100,35 @@ fun GenericSimpleButton(
     }
 }
 
+/**
+ * Componente genérico para un botón simple personalizable en Jetpack Compose.
+ *
+ * @param text Texto que se mostrará en el botón.
+ * @param onClick La acción que se ejecutará cuando se haga clic en el botón.
+ * @param modifier Modificador opcional para personalizar la apariencia del botón.
+ */
+
+@Composable
+fun GenericSimpleButtonOutlined(
+    modifier: Modifier = Modifier,
+    @StringRes text: Int,
+    onClick: () -> Unit
+){
+    OutlinedButton(
+        modifier = modifier,
+        onClick =  onClick,
+    ) {
+        Text(
+            text = stringResource(id = text),
+        )
+    }
+}
+
 @Preview
 @Composable
 fun PreviewGenericOutlinedButton() {
-    GenericOutlinedButton(
-        icon = R.drawable.send_message,
+    GenericSimpleButtonOutlined(
         onClick = { /* Acción cuando se hace clic */ },
-        backgroundColor = Color.LightGray,
-        contentColor = Color.Black
+        text = R.string.auth_no_account
     )
 }

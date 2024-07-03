@@ -3,48 +3,38 @@ package mx.com.u_life.presentation.screens
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import mx.com.u_life.presentation.enums.Routes
 import mx.com.u_life.presentation.navigation.BottomNavBar
 import mx.com.u_life.presentation.navigation.TopAppBar
-import mx.com.u_life.presentation.screens.chats.ChatsScreen
-import mx.com.u_life.presentation.screens.home.HomeScreen
-import mx.com.u_life.presentation.screens.profile.ProfileScreen
 import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
+import mx.com.u_life.presentation.MainScreenViewModel
+import mx.com.u_life.presentation.navigation.studentRoutes
 
 @Composable
 fun MainScreen() {
-    AppContent()
-}
-
-@Composable
-fun AppContent() {
+    val viewModel: MainScreenViewModel = hiltViewModel()
     val navController = rememberNavController()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
+    val isLoggedIn = viewModel.isLoggedIn.collectAsState()
 
     Scaffold(
-        topBar = { TopAppBar(visible = currentRoute != Routes.HOME.name ) },
-        bottomBar = { BottomNavBar(navController) },
+        topBar = { TopAppBar(visible = !(currentRoute == Routes.HOME.name || currentRoute == Routes.LOGIN.name || currentRoute == Routes.SIGN_UP.name)) },
+        bottomBar = { BottomNavBar(navController, visible = !(currentRoute == Routes.LOGIN.name || currentRoute == Routes.SIGN_UP.name)) },
     ) { paddingValues ->
         NavHost(
+            modifier = Modifier.padding(paddingValues),
             navController = navController,
-            startDestination = Routes.HOME.name,
-            modifier = Modifier.padding(paddingValues)
+            startDestination = Routes.HOME.name
         ) {
-            composable(route = Routes.HOME.name) {
-                HomeScreen(navController)
-            }
-            composable(route = Routes.CHATS.name) {
-                ChatsScreen(navController)
-            }
-            composable(route = Routes.PROFILE.name) {
-                ProfileScreen(navController)
-            }
+            studentRoutes(navController = navController, isLoggedIn = isLoggedIn.value)
         }
     }
+
 }

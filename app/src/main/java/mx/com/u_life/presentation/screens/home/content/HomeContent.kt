@@ -15,7 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavHostController
+import androidx.navigation.NavController
 import org.osmdroid.config.Configuration
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.util.GeoPoint
@@ -26,7 +26,7 @@ import org.osmdroid.views.overlay.Marker
 fun HomeContent(
     modifier: Modifier = Modifier,
     paddingValues: PaddingValues,
-    navHostController: NavHostController,
+    navController: NavController,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     val location by viewModel.location.observeAsState(initial = null)

@@ -18,19 +18,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import mx.com.u_life.R
 import mx.com.u_life.presentation.components.AppLogo
 import mx.com.u_life.presentation.components.GenericOutlinedButton
 import mx.com.u_life.presentation.components.GenericTextField
 import mx.com.u_life.presentation.components.PasswordTextField
-import mx.com.u_life.presentation.screens.auth.login.content.LoginViewModel
 
 @Composable
 fun SignUpContent(
     modifier: Modifier = Modifier,
     paddingValues: PaddingValues,
-    navHostController: NavHostController,
+    navController: NavController,
     viewModel: SignUpViewModel = hiltViewModel()
 ) {
     Box(
@@ -42,13 +42,13 @@ fun SignUpContent(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            SignUpForm(navHostController, viewModel)
+            SignUpForm(navController, viewModel)
         }
     }
 }
 
 @Composable
-fun SignUpForm(navHostController: NavHostController, viewModel: SignUpViewModel) {
+fun SignUpForm(navController: NavController, viewModel: SignUpViewModel) {
     val name by viewModel.name.observeAsState("")
     val email by viewModel.email.observeAsState("")
     val password by viewModel.password.observeAsState("")
