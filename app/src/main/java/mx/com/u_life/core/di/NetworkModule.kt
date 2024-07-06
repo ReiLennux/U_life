@@ -1,5 +1,6 @@
 package mx.com.u_life.core.di
 
+import androidx.navigation.NavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.gson.Gson

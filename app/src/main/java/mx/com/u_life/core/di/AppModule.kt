@@ -5,7 +5,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import mx.com.u_life.data.repository.dataStore.DataStoreRepository
-import mx.com.u_life.data.repository.fireAuth.FireAuthRepository
+import mx.com.u_life.data.repository.firebase.FireAuthRepository
 import mx.com.u_life.domain.useCases.dataStore.DataStoreUseCases
 import mx.com.u_life.domain.useCases.dataStore.GetDataBoolean
 import mx.com.u_life.domain.useCases.dataStore.GetDataInt
@@ -13,9 +13,9 @@ import mx.com.u_life.domain.useCases.dataStore.GetDataString
 import mx.com.u_life.domain.useCases.dataStore.SetDataBoolean
 import mx.com.u_life.domain.useCases.dataStore.SetDataInt
 import mx.com.u_life.domain.useCases.dataStore.SetDataString
-import mx.com.u_life.domain.useCases.fireAuth.FireAuthUseCases
-import mx.com.u_life.domain.useCases.fireAuth.LoginUser
-import mx.com.u_life.domain.useCases.fireAuth.RegisterUser
+import mx.com.u_life.domain.useCases.firebase.FireAuthUseCases
+import mx.com.u_life.domain.useCases.firebase.LoginUser
+import mx.com.u_life.domain.useCases.firebase.RegisterUser
 import javax.inject.Singleton
 
 @Module

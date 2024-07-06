@@ -11,7 +11,9 @@
     <string name="auth_login_password">Contraseña</string>
     <string name="auth_register_title">Regístrate</string>
     <string name="auth_error_login">Error al iniciar sesión</string>
+    <string name="auth_success_login">Inicio de sesión exitoso"</string>
     <string name="auth_error_register">Error al registrarse</string>
+    <string name="auth_success_register">Registro exitoso"</string>
     <string name="auth_register_name">Nombre</string>
     <string name="auth_register_confirm_password">Confirmar contraseña</string>
     <string name="auth_no_account">¿No tienes una cuenta?</string>
@@ -19,4 +21,14 @@
     <string name="auth_dialog_confirm">Aceptar</string>
     <string name="auth_dialog_tittle">¡Necesitas una cuenta!</string>
     <string name="auth_dialog_body">Para poder acceder a estas funciones tienes que iniciar sesion o registrarte</string>
+
+    <!-- StringResources for Validations -->
+    <string name="val_email_empty">El email no debe de estar vacio</string>
+    <string name="val_email_invalid">El email no es valido</string>
+    <string name="val_password_empty">La contraseña no debe estar vacía.</string>
+    <string name="val_password_invalid">La contraseña debe contener una letra mayúscula, una minúscula, un número, un caracter especial y tener mínimo 8 caracteres.</string>
+    <string name="val_text_empty">El campo no puede estar vacio.</string>
+    <string name="val_text_invalid">No debe de haber espacios en blanco al principio.</string>
+    <string name="val_password_match">Las contraseñas no coinciden</string>">
+
 </resources>

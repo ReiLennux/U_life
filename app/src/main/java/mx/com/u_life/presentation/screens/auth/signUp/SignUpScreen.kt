@@ -17,5 +17,5 @@ fun SignUpScreen(
             SignUpContent(paddingValues = innerPadding, navController = navController)
         }
     )
-    SignUpView(modifier = Modifier.fillMaxSize())
+    SignUpView(modifier = Modifier.fillMaxSize(), navController = navController)
 }

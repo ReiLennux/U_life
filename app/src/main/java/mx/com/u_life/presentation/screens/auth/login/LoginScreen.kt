@@ -17,5 +17,5 @@ fun LoginScreen(
             LoginContent(paddingValues = innerPadding, navController = navController)
         }
     )
-    LoginView(modifier = Modifier.fillMaxSize())
+    LoginView(modifier = Modifier.fillMaxSize(), navController = navController)
 }

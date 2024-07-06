@@ -1,4 +1,4 @@
-package mx.com.u_life.domain.useCases.fireAuth
+package mx.com.u_life.domain.useCases.firebase
 
 data class FireAuthUseCases(
     val registerUser: RegisterUser,
