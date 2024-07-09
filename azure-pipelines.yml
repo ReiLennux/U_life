@@ -1,57 +1,13 @@
-trigger:
-- main
-
+# https://learn.microsoft.com/azure/devops/pipelines/ecosystems/android
 pool:
   vmImage: 'ubuntu-latest'
 
-variables:
-  KEYSTORE_FILE: $(KEYSTORE_FILE)
-  KEYSTORE_PASSWORD: $(KEYSTORE_PASSWORD)
-  KEY_ALIAS: $(KEY_ALIAS)
-  KEY_PASSWORD: $(KEY_PASSWORD)
-
 steps:
-# Paso 1: Decodificar y Guardar el Keystore
-- script: echo $(KEYSTORE_FILE) | base64 --decode > my-release-key.jks
-  displayName: 'Decode Keystore'
-
-# Paso 2: Configurar el entorno de firma
-- script: |
-    echo "signingConfigs {
-        release {
-            storeFile file('my-release-key.jks')
-            storePassword '$(KEYSTORE_PASSWORD)'
-            keyAlias '$(KEY_ALIAS)'
-            keyPassword '$(KEY_PASSWORD)'
-        }
-    }" >> app/build.gradle
-  displayName: 'Setup Signing Config'
-
-# Paso 3: Compilar el Proyecto con Gradle
 - task: Gradle@2
   inputs:
+    workingDirectory: ''
     gradleWrapperFile: 'gradlew'
     gradleOptions: '-Xmx3072m'
-    tasks: 'assembleRelease'
-
-# Paso 4: Copiar los Archivos Generados
-- task: CopyFiles@2
-  inputs:
-    SourceFolder: '$(build.sourcesDirectory)/app/build/outputs/apk/release'
-    Contents: '**/*.apk'
-    TargetFolder: '$(build.artifactStagingDirectory)'
-
-# Paso 5: Publicar los Artefactos de la Compilación
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: '$(build.artifactStagingDirectory)'
-    ArtifactName: 'drop'
-    publishLocation: 'Container'
-
-- task: GooglePlayRelease@4
-  inputs:
-    applicationId: 
-    action: 'SingleApk'
-    apkFile: '$(build.sourcesDirectory)/app/build/outputs/apk/release'
-    track: 'internal'
-    releaseName: 'test-1'
+    publishJUnitResults: false
+    testResultsFiles: '**/TEST-*.xml'
+    tasks: 'assembleDebug'
