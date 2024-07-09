@@ -48,4 +48,10 @@ steps:
     ArtifactName: 'drop'
     publishLocation: 'Container'
 
-
+- task: GooglePlayRelease@4
+  inputs:
+    applicationId: 
+    action: 'SingleApk'
+    apkFile: '$(build.sourcesDirectory)/app/build/outputs/apk/release'
+    track: 'internal'
+    releaseName: 'test-1'
