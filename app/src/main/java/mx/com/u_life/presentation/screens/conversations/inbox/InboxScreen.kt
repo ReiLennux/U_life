@@ -6,17 +6,17 @@ import androidx.navigation.NavController
 import mx.com.u_life.R
 import mx.com.u_life.presentation.components.DialogWithIcon
 import mx.com.u_life.presentation.enums.Routes
-import mx.com.u_life.presentation.screens.conversations.inbox.content.ChatsContent
+import mx.com.u_life.presentation.screens.conversations.inbox.content.InboxContent
 
 @Composable
-fun ChatsScreen(
+fun InboxScreen(
     navController: NavController,
     isLoggedIn: Boolean
 ) {
     Scaffold(
         content = { innerPadding ->
             if (isLoggedIn){
-                ChatsContent(paddingValues = innerPadding, navController = navController)
+                InboxContent(paddingValues = innerPadding, navController = navController)
             } else {
                 DialogWithIcon(
                     onDismissRequest = {

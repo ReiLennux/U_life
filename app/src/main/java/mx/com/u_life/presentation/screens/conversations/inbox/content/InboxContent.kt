@@ -19,7 +19,7 @@ import mx.com.u_life.presentation.components.GenericSimpleButton
 import mx.com.u_life.presentation.enums.Routes
 
 @Composable
-fun ChatsContent(
+fun InboxContent(
     modifier: Modifier = Modifier,
     paddingValues: PaddingValues,
     navController: NavController
