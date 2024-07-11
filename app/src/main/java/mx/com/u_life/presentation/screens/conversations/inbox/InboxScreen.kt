@@ -1,4 +1,4 @@
-package mx.com.u_life.presentation.screens.chats
+package mx.com.u_life.presentation.screens.conversations.inbox
 
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -6,7 +6,7 @@ import androidx.navigation.NavController
 import mx.com.u_life.R
 import mx.com.u_life.presentation.components.DialogWithIcon
 import mx.com.u_life.presentation.enums.Routes
-import mx.com.u_life.presentation.screens.chats.content.ChatsContent
+import mx.com.u_life.presentation.screens.conversations.inbox.content.ChatsContent
 
 @Composable
 fun ChatsScreen(

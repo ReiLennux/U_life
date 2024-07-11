@@ -6,7 +6,7 @@ import androidx.navigation.compose.composable
 import mx.com.u_life.presentation.enums.Routes
 import mx.com.u_life.presentation.screens.auth.login.LoginScreen
 import mx.com.u_life.presentation.screens.auth.signUp.SignUpScreen
-import mx.com.u_life.presentation.screens.chats.ChatsScreen
+import mx.com.u_life.presentation.screens.conversations.inbox.ChatsScreen
 import mx.com.u_life.presentation.screens.home.HomeScreen
 import mx.com.u_life.presentation.screens.profile.ProfileScreen
 

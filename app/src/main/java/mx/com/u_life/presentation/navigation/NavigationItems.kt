@@ -126,7 +126,7 @@ data class NavigationItems(
 
 val navigationItems = listOf(
     NavigationItems(
-        title = "Home",
+        title = "Inicio",
         route = Routes.HOME.name,
         selectedIcon = Icons.Filled.Home,
         unselectedIcon = Icons.Outlined.Home,

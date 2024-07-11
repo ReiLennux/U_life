@@ -1,4 +1,4 @@
-package mx.com.u_life.presentation.screens.chats.content
+package mx.com.u_life.presentation.screens.conversations.inbox.content
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -13,7 +13,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
 import mx.com.u_life.presentation.components.GenericCard
 import mx.com.u_life.R
 import mx.com.u_life.presentation.components.GenericSimpleButton
