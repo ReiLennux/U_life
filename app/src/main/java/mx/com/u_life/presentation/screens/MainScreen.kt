@@ -36,5 +36,4 @@ fun MainScreen() {
             studentRoutes(navController = navController, isLoggedIn = isLoggedIn.value)
         }
     }
-
 }

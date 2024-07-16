@@ -11,29 +11,10 @@ import mx.com.u_life.presentation.screens.conversations.chats.content.ChatConten
 @Composable
 fun ChatScreen(
     navController: NavController,
-    isLoggedIn: Boolean
 ) {
     Scaffold(
         content = { innerPadding ->
-            if (isLoggedIn){
-                ChatContent(paddingValues = innerPadding, navController = navController)
-            } else {
-                DialogWithIcon(
-                    onDismissRequest = {
-                        navController.popBackStack()
-                    },
-                    onConfirmation = {
-                        navController.navigate(Routes.LOGIN.name) {
-                            popUpTo(navController.graph.startDestinationId) {
-                                inclusive = false
-                            }
-                        }
-                    },
-                    dialogTitle = R.string.auth_dialog_tittle,
-                    dialogText = R.string.auth_dialog_body,
-                    icon = R.drawable.ic_login
-                )
-            }
+            ChatContent(paddingValues = innerPadding, navController = navController)
         }
     )
 }
