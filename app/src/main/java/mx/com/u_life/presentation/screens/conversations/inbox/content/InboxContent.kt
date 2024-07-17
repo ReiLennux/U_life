@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import mx.com.u_life.presentation.components.GenericCard
 import mx.com.u_life.R
+import mx.com.u_life.presentation.components.ChatOverview
 import mx.com.u_life.presentation.components.GenericSimpleButton
 import mx.com.u_life.presentation.enums.Routes
 
@@ -27,19 +28,8 @@ fun InboxContent(
     Box(
         modifier = modifier.padding(paddingValues = paddingValues)
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
-            GenericCard(
-                title = R.string.chats_card_tittle,
-                description = R.string.chats_card_description,
-                content = { RedirectToSearch(navController) },
-                icon = R.drawable.img_person_searching
-            )
-        }
+        //EmptyInboxMessage(navController)
+        InboxMessages(navController)
     }
 }
 
@@ -55,4 +45,33 @@ fun RedirectToSearch(navController: NavController) {
             onClick = { navController.navigate(Routes.HOME.name) }
         )
     }
+}
+
+@Composable
+fun EmptyInboxMessage(navController: NavController){
+    Column(
+        modifier = Modifier
+            .fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        GenericCard(
+            title = R.string.chats_card_tittle,
+            description = R.string.chats_card_description,
+            content = { RedirectToSearch(navController) },
+            icon = R.drawable.img_person_searching
+        )
+    }
+}
+
+@Composable
+fun InboxMessages(navController: NavController){
+    ChatOverview(
+        image = R.drawable.fumo,
+        name = "Peluche Chistoso",
+        message = "Hola como estas",
+        onClickMessage = {
+            navController.navigate(Routes.CHAT.name)
+        }
+    )
 }

@@ -2,8 +2,6 @@ package mx.com.u_life.presentation.components
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -26,14 +24,11 @@ import androidx.compose.ui.unit.dp
 import mx.com.u_life.R
 
 @Composable
-fun ChatOverview(
+fun ChatName(
     modifier: Modifier = Modifier,
     @DrawableRes image: Int,
     name: String,
-    message: String,
-    onClickMessage: () -> Unit = {},
-    onClickImage: () -> Unit = {}
-){
+) {
     Surface(
         shape = MaterialTheme.shapes.medium,
         color = MaterialTheme.colorScheme.surfaceVariant,
@@ -55,22 +50,16 @@ fun ChatOverview(
                     .clip(CircleShape)
             )
             Spacer(modifier = Modifier.width(10.dp))
-            Column(
-
-            ) {
-                Text(text = name, style = MaterialTheme.typography.titleMedium)
-                Text(text = message, style = MaterialTheme.typography.bodySmall)
-            }
+            Text(text = name, style = MaterialTheme.typography.titleMedium)
         }
     }
 }
 
 @Preview
 @Composable
-fun ChatOverviewPreview() {
-    ChatOverview(
+fun ChatNamePreview() {
+    ChatName(
         image = R.drawable.fumo,
         name = "Peluche Chistoso",
-        message = "Hola, como estas?"
     )
 }

@@ -1,4 +1,4 @@
-package mx.com.u_life.presentation
+package mx.com.u_life.presentation.screens
 
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
