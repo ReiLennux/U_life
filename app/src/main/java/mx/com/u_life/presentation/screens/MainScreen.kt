@@ -23,25 +23,25 @@ fun MainScreen() {
     val currentRoute = navBackStackEntry?.destination?.route
     val isLoggedIn = viewModel.isLoggedIn.collectAsState()
 
-    if (currentRoute != Routes.CHAT.name) {
-        Scaffold(
-            topBar = { TopAppBar(visible = !(currentRoute == Routes.HOME.name || currentRoute == Routes.LOGIN.name || currentRoute == Routes.SIGN_UP.name)) },
-            bottomBar = { BottomNavBar(navController, visible = !(currentRoute == Routes.LOGIN.name || currentRoute == Routes.SIGN_UP.name)) },
-        ) { paddingValues ->
-            NavHost(
-                modifier = Modifier.padding(paddingValues),
-                navController = navController,
-                startDestination = Routes.HOME.name
-            ) {
-                studentRoutes(navController = navController, isLoggedIn = isLoggedIn.value)
+    Scaffold(
+        topBar = {
+            if (currentRoute != Routes.CHAT.name) {
+                TopAppBar(visible = viewModel.verifyRouteTop(currentRoute = currentRoute))
+            }
+        },
+        bottomBar = {
+            if (currentRoute != Routes.CHAT.name) {
+                BottomNavBar(navController, visible = viewModel.verifyRouteBottom(currentRoute = currentRoute))
             }
         }
-    } else {
+    ) { paddingValues ->
         NavHost(
+            modifier = Modifier.padding(paddingValues),
             navController = navController,
-            startDestination = Routes.CHAT.name
+            startDestination = Routes.HOME.name
         ) {
             studentRoutes(navController = navController, isLoggedIn = isLoggedIn.value)
         }
     }
 }
+

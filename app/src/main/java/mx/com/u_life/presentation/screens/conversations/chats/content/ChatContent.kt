@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -29,12 +30,7 @@ fun ChatContent(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            GenericCard(
-                title = R.string.chats_card_tittle,
-                description = R.string.chats_card_description,
-                content = { RedirectToSearch(navController) },
-                icon = R.drawable.img_person_searching
-            )
+            Text(text = "Chat Screen")
         }
     }
 }
