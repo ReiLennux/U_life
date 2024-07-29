@@ -20,12 +20,15 @@ private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(
 )
 
 class DataStoreService @Inject constructor(
-    @ApplicationContext private val context: Context
+    @ApplicationContext private val context: Context,
+    private val cryptoManager: CryptoManager
 ): DataStoreClient {
     override suspend fun setDataString(key: String, value: String) {
         val preferencesKey = stringPreferencesKey(key)
+        val encryptedValue = cryptoManager.encrypt(value)
+        val encryptedValueString = android.util.Base64.encodeToString(encryptedValue, android.util.Base64.DEFAULT)
         context.dataStore.edit { preferences ->
-            preferences[preferencesKey] = value
+            preferences[preferencesKey] = encryptedValueString
         }
     }
 
@@ -35,8 +38,14 @@ class DataStoreService @Inject constructor(
             val preferencesFlow = context.dataStore.data.map { preferences ->
                 preferences[preferencesKey] ?: ""
             }
-            preferencesFlow.first()
-        } catch (e: Exception){
+            val encryptedValueString = preferencesFlow.first()
+            if (encryptedValueString.isNotEmpty()) {
+                val encryptedValue = android.util.Base64.decode(encryptedValueString, android.util.Base64.DEFAULT)
+                cryptoManager.decrypt(encryptedValue)
+            } else {
+                ""
+            }
+        } catch (e: Exception) {
             Toast.makeText(context, e.message, Toast.LENGTH_SHORT).show()
             "error"
         }
