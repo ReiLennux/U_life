@@ -26,7 +26,7 @@ fun InboxContent(
     navController: NavController
 ) {
     Box(
-        modifier = modifier.padding(paddingValues = paddingValues)
+//        modifier = modifier.padding(paddingValues = paddingValues)
     ) {
         //EmptyInboxMessage(navController)
         InboxMessages(navController)
