@@ -27,7 +27,11 @@ class HomeViewModel @Inject constructor(
         fetchLocation()
     }
 
-    private fun fetchLocation() {
+    fun updateLocation(newLocation: Location?) {
+        _location.value = newLocation
+    }
+
+    fun fetchLocation() {
         viewModelScope.launch {
             try {
                 val locationResult = fusedLocationClient.lastLocation

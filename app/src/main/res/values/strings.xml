@@ -31,4 +31,7 @@
     <string name="val_text_invalid">No debe de haber espacios en blanco al principio.</string>
     <string name="val_password_match">Las contraseñas no coinciden</string>">
 
+    <!-- StringResources for permissions-->
+    <string name="permissions_location_title">Por favor, otorga los permisos de ubicación.</string>
+    <string name="permissions_location">U-life, necesita tu ubicacion para las funciones principales de la aplicacion</string>
 </resources>

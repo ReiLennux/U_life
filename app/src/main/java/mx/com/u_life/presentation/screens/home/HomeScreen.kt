@@ -11,7 +11,7 @@ import androidx.compose.material3.SingleChoiceSegmentedButtonRow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -27,7 +27,7 @@ fun HomeScreen(
 ) {
     Scaffold(
         topBar = {
-            var selectedIndex by remember { mutableStateOf(0) }
+            var selectedIndex by remember { mutableIntStateOf(0) }
             val options = listOf("Cuartos", "Dptos.", "Casas")
             Box(
                 modifier = Modifier.fillMaxWidth().padding(32.dp),
