@@ -40,6 +40,7 @@ import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -51,20 +52,24 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import mx.com.u_life.R
+import mx.com.u_life.presentation.enums.Routes
 
 @Composable
 fun ProfileContent(
     modifier: Modifier = Modifier,
     paddingValues: PaddingValues,
-    //navController: NavController? = null
+    navController: NavController,
+    viewModel: ProfileViewModel = hiltViewModel()
 ) {
     val scrollState = rememberScrollState()
 
     Column(
 
         modifier = modifier
-            .verticalScroll(scrollState) // Hacer que la columna sea desplazable
+            .verticalScroll(scrollState)
             .padding(paddingValues = paddingValues)
     ) {
         Column(
@@ -72,16 +77,25 @@ fun ProfileContent(
                 .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            ProfileHeader()
+            ProfileHeader(
+                viewModel = viewModel
+            )
             BodyOptions()
-            LogOut()
+            LogOut(
+                navController = navController,
+                viewModel = viewModel
+            )
         }
     }
 }
 
 
 @Composable
-fun ProfileHeader(){
+fun ProfileHeader(viewModel: ProfileViewModel){
+
+    val username by viewModel.userName.observeAsState(initial = "")
+    val userType by viewModel.userType.observeAsState(initial = "")
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -96,7 +110,7 @@ fun ProfileHeader(){
 
             Spacer(modifier = Modifier.width(16.dp))
 
-            AccountInfo()
+            AccountInfo(userName = username, userType = userType)
         }
     }
 }
@@ -134,8 +148,8 @@ fun ImageWithSetting(){
 
 @Composable
 fun AccountInfo(
-    userName: String = "@Nombre_usuario",
-    userRol: String = "@rol (arrendador)"
+    userName: String,
+    userType: String
 ){
     Column(modifier = Modifier.fillMaxWidth()) {
         Text(
@@ -147,7 +161,7 @@ fun AccountInfo(
         Spacer(modifier = Modifier
             .fillMaxWidth()
             .height(12.dp))
-        SimpleChip(text = userRol)
+        SimpleChip(text = userType)
     }
 }
 
@@ -289,7 +303,8 @@ fun OptionItem(
 
 @Composable
 fun LogOut(
-    //navController: NavController? = null
+    navController: NavController,
+    viewModel: ProfileViewModel
 ){
     Row(
         modifier = Modifier
@@ -305,6 +320,14 @@ fun LogOut(
                 text = "Cerrar Sesion",
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.error,
+                modifier = Modifier.clickable {
+                    viewModel.logOut()
+                    navController.navigate(Routes.HOME.name) {
+                        popUpTo(navController.graph.startDestinationId) {
+                            inclusive = false
+                        }
+                    }
+                }
                 )
         }
     }

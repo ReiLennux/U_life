@@ -16,7 +16,10 @@ fun ProfileScreen(
     Scaffold(
         content = { innerPadding ->
             if (isLoggedIn){
-                ProfileContent(paddingValues = innerPadding)
+                ProfileContent(
+                    paddingValues = innerPadding,
+                    navController = navController
+                )
             } else {
                 DialogWithIcon(
                     onDismissRequest = {

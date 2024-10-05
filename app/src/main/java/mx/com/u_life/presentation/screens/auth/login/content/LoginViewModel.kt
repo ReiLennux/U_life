@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.NavController
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -12,7 +11,6 @@ import kotlinx.coroutines.launch
 import mx.com.u_life.domain.models.Response
 import mx.com.u_life.domain.useCases.dataStore.DataStoreUseCases
 import mx.com.u_life.domain.useCases.firebase.FireAuthUseCases
-import mx.com.u_life.presentation.enums.Routes
 import mx.com.u_life.presentation.utils.Validations
 import javax.inject.Inject
 
@@ -83,6 +81,8 @@ class LoginViewModel @Inject constructor(
         val registerValue = _fireAuthUseCases.loginUser(_email.value!!, _password.value!!)
         if (registerValue) {
             _isLoading.value = Response.Success(true)
+            _dataStoreUseCases.setDataString.invoke("user_name", _email.value!!) /*TODO: cambiar por el nombre*/
+            _dataStoreUseCases.setDataString.invoke("userType", "Estudiante")
         } else {
             _isLoading.value = Response.Error(Exception("Error"))
         }
