@@ -116,10 +116,12 @@ fun ProfileHeader(viewModel: ProfileViewModel){
 }
 
 @Composable
-fun ImageWithSetting(){
+fun ImageWithSetting(
+    image: Int = R.drawable.fumo
+){
     Box(modifier = Modifier){
         Image(
-            painter = painterResource(id = R.drawable.fumo),
+            painter = painterResource(id = image),
             contentDescription = "",
             modifier = Modifier
                 .size(160.dp)
