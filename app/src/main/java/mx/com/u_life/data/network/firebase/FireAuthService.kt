@@ -3,7 +3,6 @@ package mx.com.u_life.data.network.firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.suspendCancellableCoroutine
-import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 import kotlin.coroutines.resume
 
@@ -30,7 +29,7 @@ class FireAuthService @Inject constructor(
                         continuation.resume(false)
                     }
             }
-        } catch (_e: Exception) {
+        } catch (e: Exception) {
             return false
         }
     }
@@ -48,7 +47,7 @@ class FireAuthService @Inject constructor(
                         continuation.resume(false)
                     }
             }
-        } catch (_e: Exception) {
+        } catch (e: Exception) {
             false
         }
     }

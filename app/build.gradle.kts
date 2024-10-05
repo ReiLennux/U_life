@@ -67,7 +67,7 @@ dependencies {
     implementation (libs.play.services.location)
 
     implementation(libs.androidx.runtime.livedata)
-    implementation(libs.play.services.maps)
+    //implementation(libs.play.maps)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -124,4 +124,7 @@ dependencies {
     implementation(libs.firebase.database)
     // Maps
     implementation (libs.osmdroid.android)
+
+    // Extended Icons
+    implementation(libs.material.icons.extended)
 }
