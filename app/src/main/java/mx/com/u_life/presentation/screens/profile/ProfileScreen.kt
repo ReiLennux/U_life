@@ -6,7 +6,6 @@ import androidx.navigation.NavController
 import mx.com.u_life.R
 import mx.com.u_life.presentation.components.DialogWithIcon
 import mx.com.u_life.presentation.enums.Routes
-import mx.com.u_life.presentation.screens.auth.login.content.LoginContent
 import mx.com.u_life.presentation.screens.profile.content.ProfileContent
 
 @Composable
@@ -17,7 +16,7 @@ fun ProfileScreen(
     Scaffold(
         content = { innerPadding ->
             if (isLoggedIn){
-                ProfileContent(paddingValues = innerPadding, navController = navController)
+                ProfileContent(paddingValues = innerPadding)
             } else {
                 DialogWithIcon(
                     onDismissRequest = {

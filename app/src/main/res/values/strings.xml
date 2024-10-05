@@ -22,6 +22,9 @@
     <string name="auth_dialog_tittle">¡Necesitas una cuenta!</string>
     <string name="auth_dialog_body">Para poder acceder a estas funciones tienes que iniciar sesion o registrarte</string>
 
+    <!--StringResources for LogOut-->
+    <string name="logout_Text">Cerrar Sesion</string>
+
     <!-- StringResources for Validations -->
     <string name="val_email_empty">El email no debe de estar vacio</string>
     <string name="val_email_invalid">El email no es valido</string>
@@ -34,4 +37,14 @@
     <!-- StringResources for permissions-->
     <string name="permissions_location_title">Por favor, otorga los permisos de ubicación.</string>
     <string name="permissions_location">U-life, necesita tu ubicacion para las funciones principales de la aplicacion</string>
+
+    <!--StringResources for profileScreen-->
+    <string name="notification_option_title">Notificaciones de la aplicación</string>
+    <string name="notification_option_body">Cuando están activas podemos enviarte notificaciones sobre rentas cercanas con tus últimos intereses.</string>
+    <string name="Owner_option_title">¿Eres arrendador?</string>
+    <string name="Owner_option_body">Conviértete en un arrendatario y empieza a darte a conocer.</string>
+    <string name="Info_option_title">Información de la aplicación</string>
+    <string name="Info_option_body">Esta aplicación está hecha por @LyonsTeam. Versión de la app: 2.0.0</string>
+    <string name="Crash_Error_title">¿Todo bien?</string>
+    <string name="Crash_Error_body">"Reporta un problema que haya ocurrido en la app."</string>
 </resources>
