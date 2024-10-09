@@ -33,7 +33,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavHostController
@@ -87,6 +86,32 @@ fun BottomNavBar(navController: NavHostController, visible : Boolean) {
     }
 }
 
+@Composable
+fun TopAppBar(visible : Boolean = true) {
+    AnimatedVisibility(
+        visible = visible,
+        enter = slideInVertically() + expandVertically() + fadeIn(),
+        exit = slideOutVertically() + shrinkVertically() + fadeOut()
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(120.dp)
+                .background(MaterialTheme.colorScheme.background),
+            contentAlignment = Alignment.BottomStart
+        ) {
+            AppLogo()
+            HorizontalDivider(
+                modifier = Modifier
+                    .padding(top = 10.dp)
+                    .fillMaxWidth()
+                    .height(1.dp),
+                color = Color.LightGray
+            )
+
+        }
+    }
+}
 
 data class NavigationItems(
     val title: String,
