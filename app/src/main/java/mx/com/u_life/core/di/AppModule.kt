@@ -4,8 +4,11 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import mx.com.u_life.data.repository.catalogs.CatalogsRepository
 import mx.com.u_life.data.repository.dataStore.DataStoreRepository
 import mx.com.u_life.data.repository.firebase.FireAuthRepository
+import mx.com.u_life.domain.useCases.catalogs.CatalogsUseCases
+import mx.com.u_life.domain.useCases.catalogs.GetPropertiesType
 import mx.com.u_life.domain.useCases.dataStore.DataStoreUseCases
 import mx.com.u_life.domain.useCases.dataStore.GetDataBoolean
 import mx.com.u_life.domain.useCases.dataStore.GetDataInt
@@ -40,4 +43,12 @@ object AppModule {
             registerUser = RegisterUser(fireAuthRepository),
             loginUser = LoginUser(fireAuthRepository)
         )
+
+    @Singleton
+    @Provides
+    fun provideCatalogsUseCases(catalogsRepository: CatalogsRepository): CatalogsUseCases =
+        CatalogsUseCases(
+            getPropertiesType = GetPropertiesType(catalogsRepository)
+        )
+
 }

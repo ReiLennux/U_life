@@ -87,33 +87,6 @@ fun BottomNavBar(navController: NavHostController, visible : Boolean) {
     }
 }
 
-@Preview
-@Composable
-fun TopAppBar(visible : Boolean = true) {
-    AnimatedVisibility(
-        visible = visible,
-        enter = slideInVertically() + expandVertically() + fadeIn(),
-        exit = slideOutVertically() + shrinkVertically() + fadeOut()
-    ) {
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(120.dp)
-                .background(MaterialTheme.colorScheme.background),
-            contentAlignment = Alignment.BottomStart
-        ) {
-            AppLogo()
-            HorizontalDivider(
-                modifier = Modifier
-                    .padding(top = 10.dp)
-                    .fillMaxWidth()
-                    .height(1.dp),
-                color = Color.LightGray
-            )
-
-        }
-    }
-}
 
 data class NavigationItems(
     val title: String,
