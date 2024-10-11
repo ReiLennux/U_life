@@ -7,6 +7,7 @@ import dagger.hilt.components.SingletonComponent
 import mx.com.u_life.data.repository.catalogs.CatalogsRepository
 import mx.com.u_life.data.repository.dataStore.DataStoreRepository
 import mx.com.u_life.data.repository.firebase.FireAuthRepository
+import mx.com.u_life.data.repository.user.UserRepository
 import mx.com.u_life.domain.useCases.catalogs.CatalogsUseCases
 import mx.com.u_life.domain.useCases.catalogs.GetPropertiesType
 import mx.com.u_life.domain.useCases.dataStore.DataStoreUseCases
@@ -19,6 +20,8 @@ import mx.com.u_life.domain.useCases.dataStore.SetDataString
 import mx.com.u_life.domain.useCases.firebase.FireAuthUseCases
 import mx.com.u_life.domain.useCases.firebase.LoginUser
 import mx.com.u_life.domain.useCases.firebase.RegisterUser
+import mx.com.u_life.domain.useCases.userUseCases.GetUser
+import mx.com.u_life.domain.useCases.userUseCases.UserUseCases
 import javax.inject.Singleton
 
 @Module
@@ -49,6 +52,13 @@ object AppModule {
     fun provideCatalogsUseCases(catalogsRepository: CatalogsRepository): CatalogsUseCases =
         CatalogsUseCases(
             getPropertiesType = GetPropertiesType(catalogsRepository)
+        )
+
+    @Singleton
+    @Provides
+    fun provideUserUseCases(userRepository: UserRepository): UserUseCases =
+        UserUseCases(
+            getUser = GetUser(userRepository)
         )
 
 }

@@ -15,12 +15,9 @@ class CatalogsService @Inject constructor(
             suspendCancellableCoroutine { continuation ->
                 _fireStore.collection("ComCatPropertyType").get()
                     .addOnSuccessListener { result ->
-                        // Resume the coroutine with the result
-                        println(result.documents)
                         continuation.resume(result)
                     }
                     .addOnFailureListener { exception ->
-                        // Resume the coroutine with an exception
                         println("Error: ${exception.message}")
                         continuation.resumeWithException(exception)
                     }
