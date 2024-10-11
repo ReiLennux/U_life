@@ -67,6 +67,7 @@ dependencies {
     implementation (libs.play.services.location)
 
     implementation(libs.androidx.runtime.livedata)
+    implementation(libs.volley)
     //implementation(libs.play.maps)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
@@ -127,4 +128,9 @@ dependencies {
 
     // Extended Icons
     implementation(libs.material.icons.extended)
+
+    implementation(libs.material3)
+    implementation(libs.coil.compose)
+    implementation(libs.coil.kt.coil.compose)
+
 }
