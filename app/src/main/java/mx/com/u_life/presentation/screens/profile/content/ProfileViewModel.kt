@@ -7,6 +7,10 @@ import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import mx.com.u_life.core.constants.Constants.USER_EMAIL
+import mx.com.u_life.core.constants.Constants.USER_NAME
+import mx.com.u_life.core.constants.Constants.USER_TYPE
+import mx.com.u_life.core.constants.Constants.USER_UID
 import mx.com.u_life.domain.useCases.dataStore.DataStoreUseCases
 import javax.inject.Inject
 
@@ -27,15 +31,17 @@ class ProfileViewModel @Inject constructor(
 
     private fun setUserInfo() {
         viewModelScope.launch {
-            _userName.value = _dataStoreUseCases.getDataString("user_name")
-            _userType.value = _dataStoreUseCases.getDataString("userType")
+            _userName.value = _dataStoreUseCases.getDataString(USER_NAME)
+            _userType.value = _dataStoreUseCases.getDataString(USER_TYPE)
         }
     }
 
     fun logOut(){
         viewModelScope.launch {
-            _dataStoreUseCases.setDataString.invoke("user_name", "")
-            _dataStoreUseCases.setDataString.invoke("userType", "")
+            _dataStoreUseCases.setDataString.invoke(USER_TYPE, "")
+            _dataStoreUseCases.setDataString.invoke(USER_UID, "")
+            _dataStoreUseCases.setDataString.invoke(USER_NAME, "")
+            _dataStoreUseCases.setDataString.invoke(USER_EMAIL, "")
             _fireAuth.signOut()
         }
     }

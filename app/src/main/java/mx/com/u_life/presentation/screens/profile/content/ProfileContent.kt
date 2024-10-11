@@ -29,6 +29,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AddBusiness
 import androidx.compose.material.icons.filled.Build
 import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.CheckCircle
+import androidx.compose.material.icons.filled.CheckCircleOutline
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Mail
 import androidx.compose.material3.Icon
@@ -55,6 +57,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import mx.com.u_life.R
+import mx.com.u_life.presentation.enums.OwnerRoutes
 import mx.com.u_life.presentation.enums.Routes
 
 @Composable
@@ -80,7 +83,7 @@ fun ProfileContent(
             ProfileHeader(
                 viewModel = viewModel
             )
-            BodyOptions()
+            BodyOptions(navController = navController)
             LogOut(
                 navController = navController,
                 viewModel = viewModel
@@ -192,7 +195,7 @@ fun SimpleChip(
 }
 
 @Composable
-fun BodyOptions() {
+fun BodyOptions(navController: NavController) {
     var checked by remember { mutableStateOf(true) }
     val context = LocalContext.current
     Box(
@@ -226,16 +229,16 @@ fun BodyOptions() {
                 click = { checked = !checked }
             )
             OptionItem(
-                title = R.string.Owner_option_title,
-                body = R.string.Owner_option_body,
+                title = R.string.student_verify_title,
+                body = R.string.student_verify_body,
                 option = {
                     Icon(
-                        imageVector = Icons.Filled.AddBusiness,
+                        imageVector = Icons.Filled.CheckCircle,
                         contentDescription = "Opcion para arrendadores",
                         tint = MaterialTheme.colorScheme.primary
                     )
                 },
-                click = { /* TODO: Navigate to OwnerScreens */ }
+                click = {/*TODO: Navigate to verify profile screen*/ }
             )
             OptionItem(
                 title = R.string.Info_option_title,
