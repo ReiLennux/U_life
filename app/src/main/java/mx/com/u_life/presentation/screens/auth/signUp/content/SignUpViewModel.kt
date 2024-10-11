@@ -9,7 +9,6 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import mx.com.u_life.domain.models.Response
-import mx.com.u_life.domain.useCases.dataStore.DataStoreUseCases
 import mx.com.u_life.domain.useCases.firebase.FireAuthUseCases
 import mx.com.u_life.presentation.utils.Validations
 import javax.inject.Inject
@@ -17,7 +16,6 @@ import javax.inject.Inject
 @HiltViewModel
 class SignUpViewModel @Inject constructor(
     private val _fireAuthUseCases: FireAuthUseCases,
-    private val _dataStoreUseCases: DataStoreUseCases,
     private val _validations: Validations,
 ): ViewModel() {
     // Flow
@@ -104,8 +102,6 @@ class SignUpViewModel @Inject constructor(
         val registerValue = _fireAuthUseCases.registerUser(_email.value!!, _password.value!!, _name.value!!)
         if (registerValue) {
             _isLoading.value = Response.Success(true)
-            _dataStoreUseCases.setDataString.invoke("user_name", _name.value!!)
-            _dataStoreUseCases.setDataString.invoke("userType", "Estudiante")
         } else {
             _isLoading.value = Response.Error(Exception("Error"))
         }

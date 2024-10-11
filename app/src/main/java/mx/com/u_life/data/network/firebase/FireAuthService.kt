@@ -19,9 +19,10 @@ class FireAuthService @Inject constructor(
                             val userId = task.result.user?.uid
                             val user = hashMapOf(
                                 "name" to name,
-                                "userType" to "student"
+                                "userType" to "student",
+                                "email" to email,
                             )
-                            _fireStore.collection("students").document(userId!!).set(user)
+                            _fireStore.collection("Users").document(userId!!).set(user)
                             continuation.resume(true)
                         }
                     }
