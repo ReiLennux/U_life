@@ -11,9 +11,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
-import mx.com.u_life.R
-import mx.com.u_life.presentation.components.GenericCard
-import mx.com.u_life.presentation.screens.conversations.inbox.content.RedirectToSearch
 
 @Composable
 fun ChatContent(

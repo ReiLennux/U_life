@@ -1,10 +1,8 @@
 package mx.com.u_life.presentation.screens.owner_screens.addproperty.content
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -22,12 +20,8 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.Save
 import androidx.compose.material3.Button
-import androidx.compose.material3.DropdownMenu
-import androidx.compose.material3.DropdownMenuItem
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -45,10 +39,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import mx.com.u_life.R
 import mx.com.u_life.domain.models.generic.convertToGenericCatalog
@@ -58,7 +50,7 @@ import mx.com.u_life.presentation.components.DefaultDropDownMenu
 fun AddPropertyContent(
     paddingValues: PaddingValues,
     viewModel: AddPropertyViewModel = hiltViewModel(),
-    navController: NavController? = null
+    navController: NavController
 
 ) {
     val scrollState = rememberScrollState()
@@ -290,10 +282,4 @@ fun SaveButton() {
             Text("Guardar propiedad")
         }
     }
-}
-
-@Preview(widthDp = 500, heightDp = 2000, showBackground = true)
-@Composable
-fun Pw(navController: NavController? = null) {
-    AddPropertyContent(paddingValues = PaddingValues(0.dp))
 }
