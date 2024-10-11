@@ -10,20 +10,25 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Carousel(items: List<String>) {
+fun Carousel(
+    items: List<String>,
+    width : Dp = 250.dp,
+    height : Dp = 200.dp
+) {
     Column(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         HorizontalUncontainedCarousel(
             state = rememberCarouselState { items.count() },
-            itemWidth = 250.dp,
+            itemWidth = width,
             itemSpacing = 12.dp,
             contentPadding = PaddingValues(horizontal = 12.dp),
             modifier = Modifier
@@ -41,7 +46,7 @@ fun Carousel(items: List<String>) {
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
-                    .height(200.dp)
+                    .height(height)
                     .fillMaxWidth()
                     .maskClip(shape = MaterialTheme.shapes.extraLarge)
             )
