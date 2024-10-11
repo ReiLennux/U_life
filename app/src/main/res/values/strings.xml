@@ -41,8 +41,8 @@
     <!--StringResources for profileScreen-->
     <string name="notification_option_title">Notificaciones de la aplicación</string>
     <string name="notification_option_body">Cuando están activas podemos enviarte notificaciones sobre rentas cercanas con tus últimos intereses.</string>
-    <string name="Owner_option_title">¿Eres arrendador?</string>
-    <string name="Owner_option_body">Conviértete en un arrendatario y empieza a darte a conocer.</string>
+    <string name="student_verify_title">Verificar Perfil</string>
+    <string name="student_verify_body">Verifica que eres estudiante para tener acceso a todas las funciones</string>
     <string name="Info_option_title">Información de la aplicación</string>
     <string name="Info_option_body">Esta aplicación está hecha por @LyonsTeam. Versión de la app: 2.0.0</string>
     <string name="Crash_Error_title">¿Todo bien?</string>
