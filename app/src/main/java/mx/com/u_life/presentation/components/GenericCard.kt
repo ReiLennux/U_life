@@ -126,7 +126,10 @@ fun GenericPropertiesCard(
                 .fillMaxWidth()
                 .padding(16.dp)
         ) {
-            Carousel(items = items)
+            Carousel(
+                items = items,
+                width = 350.dp
+            )
             Spacer(modifier = Modifier.height(16.dp))
             Text(
                 text = title,
