@@ -1,5 +1,4 @@
-package mx.com.u_life.presentation.screens.profile.content
-
+package mx.com.u_life.presentation.screens.owner_screens.profile.content
 
 import android.content.ActivityNotFoundException
 import android.content.Context
@@ -55,7 +54,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import mx.com.u_life.R
-import mx.com.u_life.presentation.enums.Routes
 
 @Composable
 fun ProfileContent(
@@ -231,7 +229,7 @@ fun BodyOptions(navController: NavController) {
                 option = {
                     Icon(
                         imageVector = Icons.Filled.Verified,
-                        contentDescription = "Opcion para arrendadores",
+                        contentDescription = "Verificar perfil",
                         tint = MaterialTheme.colorScheme.primary
                     )
                 },
@@ -324,13 +322,10 @@ fun LogOut(
                 color = MaterialTheme.colorScheme.error,
                 modifier = Modifier.clickable {
                     viewModel.logOut()
-                    navController.navigate(Routes.HOME.name) {
-                        popUpTo(navController.graph.startDestinationId) {
-                            inclusive = false
-                        }
-                    }
+                    /*TODO: Navigate to students home screen*/
+                    //navController.navigate(Routes.LOGIN.name)
                 }
-                )
+            )
         }
     }
 

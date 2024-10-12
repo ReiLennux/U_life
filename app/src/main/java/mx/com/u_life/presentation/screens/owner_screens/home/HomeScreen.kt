@@ -18,7 +18,7 @@ import mx.com.u_life.presentation.enums.OwnerRoutes
 import mx.com.u_life.presentation.screens.owner_screens.home.content.HomeContent
 
 @Composable
-fun HomeScreen(
+fun OwnerHomeScreen(
     navController: NavController
 ) {
     val listState = rememberLazyListState()

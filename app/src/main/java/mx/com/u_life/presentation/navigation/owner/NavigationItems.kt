@@ -13,9 +13,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AddHomeWork
+import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.outlined.AddHomeWork
+import androidx.compose.material.icons.outlined.AccountCircle
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material3.Badge
 import androidx.compose.material3.BadgedBox
@@ -128,12 +128,19 @@ val navigationItems = listOf(
         unselectedIcon = Icons.Outlined.Home,
         hasNews = false
     ),
-    NavigationItems(
-        title = "Agregar",
-        route = OwnerRoutes.OWNER_ADD_PROPERTY.name,
-        selectedIcon = Icons.Filled.AddHomeWork,
-        unselectedIcon = Icons.Outlined.AddHomeWork,
-        hasNews = false,
-        hasBadge = null
+    NavigationItems (
+        title = "Chats",
+        route = OwnerRoutes.OWNER_INBOX.name,
+        selectedIcon = Icons.Filled.AccountCircle,
+        unselectedIcon = Icons.Outlined.AccountCircle,
+        hasNews = false
+    ),
+    NavigationItems (
+        title = "Perfil",
+        route = OwnerRoutes.OWNER_PROFILE.name,
+        selectedIcon = Icons.Filled.AccountCircle,
+        unselectedIcon = Icons.Outlined.AccountCircle,
+        hasNews = false
     )
+
 )
