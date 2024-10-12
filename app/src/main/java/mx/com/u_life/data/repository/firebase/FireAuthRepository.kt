@@ -6,8 +6,8 @@ import javax.inject.Inject
 class FireAuthRepository @Inject constructor(
     private val _fireAuthService: FireAuthService
 ) {
-    suspend fun registerUser(email: String, password: String, name: String): Boolean {
-        val success = _fireAuthService.registerUser(email, password, name)
+    suspend fun registerUser(email: String, password: String, name: String, type: String): Boolean {
+        val success = _fireAuthService.registerUser(email, password, name, type)
         return success
     }
 

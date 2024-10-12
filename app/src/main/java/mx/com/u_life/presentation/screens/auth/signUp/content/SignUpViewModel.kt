@@ -35,6 +35,9 @@ class SignUpViewModel @Inject constructor(
     private val _name = MutableLiveData("")
     val name: LiveData<String> = _name
 
+    private val _type = MutableLiveData("")
+    val type: LiveData<String> = _type
+
     // Definiciones para errores
     private val _emailError = MutableLiveData<String?>()
     val emailError: LiveData<String?> = _emailError
@@ -65,6 +68,9 @@ class SignUpViewModel @Inject constructor(
             }
             is SignUpFormEvent.NameChanged -> {
                 _name.value = event.name
+            }
+            is SignUpFormEvent.UserTypeChanged -> {
+                _type.value = event.userType
             }
             is SignUpFormEvent.Submit -> {
                 submitData()
@@ -99,7 +105,7 @@ class SignUpViewModel @Inject constructor(
 
     private suspend fun signUpUser() = viewModelScope.async {
         _isLoading.value = Response.Loading
-        val registerValue = _fireAuthUseCases.registerUser(_email.value!!, _password.value!!, _name.value!!)
+        val registerValue = _fireAuthUseCases.registerUser(_email.value!!, _password.value!!, _name.value!!, _type.value!!)
         if (registerValue) {
             _isLoading.value = Response.Success(true)
         } else {

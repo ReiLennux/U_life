@@ -10,7 +10,7 @@ class FireAuthService @Inject constructor(
     private val _fireAuth: FirebaseAuth,
     private val _fireStore: FirebaseFirestore
 ) {
-    suspend fun registerUser(email: String, password: String, name: String): Boolean {
+    suspend fun registerUser(email: String, password: String, name: String, type: String): Boolean {
         return try {
             suspendCancellableCoroutine { continuation ->
                 _fireAuth.createUserWithEmailAndPassword(email, password)
@@ -19,7 +19,7 @@ class FireAuthService @Inject constructor(
                             val userId = task.result.user?.uid
                             val user = hashMapOf(
                                 "name" to name,
-                                "userType" to "student",
+                                "userType" to type,
                                 "email" to email,
                             )
                             _fireStore.collection("Users").document(userId!!).set(user)

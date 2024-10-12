@@ -4,31 +4,48 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.School
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import mx.com.u_life.R
-import mx.com.u_life.presentation.components.AppLogo
+import mx.com.u_life.presentation.components.DialogWithIcon
+import mx.com.u_life.presentation.components.GenericCardWithRadio
 import mx.com.u_life.presentation.components.GenericOutlinedButton
 import mx.com.u_life.presentation.components.GenericTextField
 import mx.com.u_life.presentation.components.PasswordTextField
-import mx.com.u_life.presentation.enums.Routes
 
 @Composable
 fun SignUpContent(
@@ -37,6 +54,7 @@ fun SignUpContent(
     navController: NavController,
     viewModel: SignUpViewModel = hiltViewModel()
 ) {
+    
     Box(
         modifier = modifier.padding(paddingValues = paddingValues)
     ) {
@@ -47,17 +65,137 @@ fun SignUpContent(
             verticalArrangement = Arrangement.Center
         ) {
             item {
-                AppLogo()
+                WelcomeText()
                 HorizontalDivider()
                 Spacer(modifier = Modifier.height(20.dp))
-                SignUpForm(navController, viewModel)
+                RegisterSection(viewModel = viewModel)
             }
         }
     }
 }
 
 @Composable
-fun SignUpForm(navController: NavController, viewModel: SignUpViewModel) {
+fun WelcomeText(){
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(horizontal = 24.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = stringResource(id = R.string.welcome_title),
+            style = MaterialTheme.typography.headlineLarge.copy(fontWeight = FontWeight.Bold),
+            color = MaterialTheme.colorScheme.primary
+        )
+        Spacer(modifier = Modifier.height(8.dp))
+        Text(
+            text = stringResource(id = R.string.welcome_body),
+            style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Medium)
+        )
+        Spacer(modifier = Modifier.height(24.dp))
+    }
+}
+
+@Composable
+fun RegisterSection(
+    viewModel: SignUpViewModel
+){
+    
+    val scope = rememberCoroutineScope()
+    val pagerState = rememberPagerState(pageCount = { 2 })
+    HorizontalPager(
+        state = pagerState,
+        modifier = Modifier.fillMaxSize(),
+        userScrollEnabled = false
+    ) { page ->
+        when (page) {
+            0 -> SignUpRoleSelection(
+                viewModel = viewModel,
+                onRoleSelected = {
+                    scope.launch {
+                        pagerState.animateScrollToPage(1)
+                    }
+                }
+            )
+
+            1 -> SignUpForm(
+                viewModel = viewModel,
+                onRoleSelected = {
+                    scope.launch {
+                        pagerState.animateScrollToPage(0)
+                    }
+                }
+            )
+        }
+    }
+}
+
+@Composable
+fun SignUpRoleSelection(viewModel: SignUpViewModel, onRoleSelected: () -> Unit) {
+    val userType by viewModel.type.observeAsState(null)
+    var showDialog by remember { mutableStateOf(false) }
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(horizontal = 24.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(text = "Soy...", style = MaterialTheme.typography.titleLarge)
+        GenericCardWithRadio(
+            title = R.string.auth_user_type_owner_title,
+            description = R.string.auth_user_type_owner_body,
+            isSelected = userType == "owner",
+            onSelect = {
+                viewModel.onEvent(SignUpFormEvent.UserTypeChanged("owner"))
+            },
+            icon = Icons.Default.Home
+        )
+
+        GenericCardWithRadio(
+            title = R.string.auth_user_type_student_title,
+            description = R.string.auth_user_type_student_body,
+            isSelected = userType == "student",
+            onSelect = {
+                viewModel.onEvent(SignUpFormEvent.UserTypeChanged("student"))
+            },
+            icon = Icons.Default.School
+        )
+
+        Spacer(modifier = Modifier.height(24.dp))
+
+        if (userType != null) {
+            Button(
+                onClick = {
+                    onRoleSelected()
+                    showDialog = true
+                          },
+                modifier = Modifier.fillMaxWidth(),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.primary
+                )
+            ) {
+                Text(
+                    text = stringResource(id = R.string.continue_text),
+                    color = Color.White
+                )
+            }
+        }
+    }
+    if (showDialog) {
+        DialogWithIcon(
+            onDismissRequest = { showDialog = false },
+            onConfirmation  = { showDialog = false },
+            dialogTitle = R.string.auth_verify_alert_title,
+            dialogText = R.string.auth_verify_alert_body,
+            icon = R.drawable.ic_info
+        )
+    }
+}
+
+@Composable
+fun SignUpForm(viewModel: SignUpViewModel, onRoleSelected: () -> Job) {
     val scope = rememberCoroutineScope()
     //Variables
     val name by viewModel.name.observeAsState("")
@@ -131,19 +269,37 @@ fun SignUpForm(navController: NavController, viewModel: SignUpViewModel) {
         )
         Spacer(modifier = Modifier.height(15.dp))
         //Button for SignUp
-        GenericOutlinedButton(
-            modifier = Modifier.align(Alignment.CenterHorizontally),
-            text = R.string.auth_register_title,
-            backgroundColor = MaterialTheme.colorScheme.primary,
-            contentColor = MaterialTheme.colorScheme.onPrimary,
-            onClick = {
-                scope.launch {
-                    viewModel.onEvent(
-                        SignUpFormEvent.Submit
-                    )
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceAround,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            TextButton(
+                onClick = {
+                    scope.launch {
+                        onRoleSelected()
+                    }
                 }
+            ){
+                Text(
+                    text = stringResource(id = R.string.back_text)
+                )
             }
-        )
-    }
+            GenericOutlinedButton(
+                text = R.string.auth_register_title,
+                backgroundColor = MaterialTheme.colorScheme.primary,
+                contentColor = MaterialTheme.colorScheme.onPrimary,
+                onClick = {
+                    scope.launch {
+                        viewModel.onEvent(
+                            SignUpFormEvent.Submit
+                        )
+                    }
+                }
+            )
+        }
 
+    }
 }
+
+
