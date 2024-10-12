@@ -5,6 +5,7 @@ coilComposeVersion = "2.6.0"
 converterGson = "2.9.0"
 datastorePreferences = "1.1.1"
 firebaseBom = "33.1.1"
+foundation = "1.7.3"
 hiltAndroid = "2.51.1"
 hiltWork = "1.2.0"
 kotlin = "1.9.0"
@@ -32,6 +33,7 @@ volley = "1.2.1"
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferences" }
+androidx-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "foundation" }
 androidx-hilt-compiler = { module = "androidx.hilt:hilt-compiler", version.ref = "hiltWork" }
 androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltWork" }
 androidx-hilt-work = { module = "androidx.hilt:hilt-work", version.ref = "hiltWork" }

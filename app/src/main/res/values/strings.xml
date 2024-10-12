@@ -1,4 +1,8 @@
 <resources>
+    <!-- StringResources constant -->
+    <string name="continue_text">Continuar</string>
+    <string name="back_text">Regresar</string>
+
     <string name="app_name">U-Life</string>
     <!-- StringResources for chat -->
     <string name="chats_card_tittle">¡No hay nada aquí!</string>
@@ -6,6 +10,8 @@
     <string name="chats_card_Search">Buscar</string>
 
     <!-- StringResources for Auth -->
+    <string name="welcome_title">Bienvenido a U-Life</string>
+    <string name="welcome_body">Iniciar sesión</string>
     <string name="auth_login_title">Iniciar sesión</string>
     <string name="auth_login_email">Correo electrónico</string>
     <string name="auth_login_password">Contraseña</string>
@@ -21,6 +27,12 @@
     <string name="auth_dialog_confirm">Aceptar</string>
     <string name="auth_dialog_tittle">¡Necesitas una cuenta!</string>
     <string name="auth_dialog_body">Para poder acceder a estas funciones tienes que iniciar sesion o registrarte</string>
+    <string name="auth_verify_alert_title">Verificación de identidad</string>
+    <string name="auth_verify_alert_body">Te pediremos más datos para comprobar tu identidad.</string>
+    <string name="auth_user_type_owner_title">Arrendador</string>
+    <string name="auth_user_type_owner_body">Si eres propietario de inmuebles y deseas arrendar tu propiedad.</string>
+    <string name="auth_user_type_student_title">Estudiante</string>
+    <string name="auth_user_type_student_body">Si eres estudiante buscando una propiedad para alquilar.</string>
 
     <!--StringResources for LogOut-->
     <string name="logout_Text">Cerrar Sesion</string>

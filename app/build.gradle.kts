@@ -129,8 +129,13 @@ dependencies {
     // Extended Icons
     implementation(libs.material.icons.extended)
 
+    //Carousel
     implementation(libs.material3)
     implementation(libs.coil.compose)
     implementation(libs.coil.kt.coil.compose)
+
+    //Horizontal Pager
+    implementation (libs.androidx.foundation)
+
 
 }
