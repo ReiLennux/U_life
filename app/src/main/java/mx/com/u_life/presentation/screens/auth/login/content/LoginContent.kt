@@ -1,35 +1,37 @@
 package mx.com.u_life.presentation.screens.auth.login.content
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextDecoration
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
 import kotlinx.coroutines.launch
 import mx.com.u_life.R
 import mx.com.u_life.presentation.components.AppLogo
@@ -122,23 +124,35 @@ fun LoginForm(navController: NavController, viewModel: LoginViewModel) {
         )
         Spacer(modifier = Modifier.height(15.dp))
         //Text Button for SignUp
-        Row(
-            modifier = Modifier.padding(10.dp).fillMaxWidth(),
-            horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Text(
-                text = stringResource(id = R.string.auth_no_account),
-                color = MaterialTheme.colorScheme.inversePrimary,
-            )
-            Spacer(modifier = Modifier.width(5.dp))
-            Text(
-                modifier = Modifier.clickable{ navController.navigate(Routes.SIGN_UP.name) },
-                text = stringResource(id = R.string.auth_register_title),
-                color = MaterialTheme.colorScheme.primary,
-                textDecoration = TextDecoration.Underline
-            )
-        }
+        SignUpSection(navController = navController)
     }
 
+}
+
+@Composable
+fun SignUpSection(navController: NavController){
+    val annotatedString = buildAnnotatedString {
+        append(stringResource(id = R.string.auth_no_account) + " ")
+
+        pushStringAnnotation(tag = "signup", annotation = "")
+        withStyle(
+            style = SpanStyle(
+                color = MaterialTheme.colorScheme.primary,
+                fontWeight = FontWeight.Bold,
+                textDecoration = TextDecoration.Underline
+            )
+        ) {
+            append(stringResource(id = R.string.auth_register_title))
+        }
+        pop()
+    }
+    Box(modifier = Modifier
+        .fillMaxWidth()
+        .padding(3.dp), contentAlignment = Alignment.Center){
+        ClickableText(text = annotatedString, onClick = { offset ->
+            annotatedString.getStringAnnotations(tag = "signup", start = offset, end = offset).firstOrNull()?.let {
+                navController.navigate(Routes.SIGN_UP.name)
+            }
+        }, style = TextStyle(color = Color.Gray, fontStyle = FontStyle.Italic))
+    }
 }

@@ -224,8 +224,8 @@ fun BodyOptions(navController: NavController) {
                 click = { checked = !checked }
             )
             OptionItem(
-                title = R.string.student_verify_title,
-                body = R.string.student_verify_body,
+                title = R.string.verify_title,
+                body = R.string.owner_verify_body,
                 option = {
                     Icon(
                         imageVector = Icons.Filled.Verified,

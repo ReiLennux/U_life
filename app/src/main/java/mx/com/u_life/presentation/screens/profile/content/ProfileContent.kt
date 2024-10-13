@@ -226,7 +226,7 @@ fun BodyOptions(navController: NavController) {
                 click = { checked = !checked }
             )
             OptionItem(
-                title = R.string.student_verify_title,
+                title = R.string.verify_title,
                 body = R.string.student_verify_body,
                 option = {
                     Icon(

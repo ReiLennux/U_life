@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.School
@@ -33,8 +34,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
@@ -69,6 +76,8 @@ fun SignUpContent(
                 HorizontalDivider()
                 Spacer(modifier = Modifier.height(20.dp))
                 RegisterSection(viewModel = viewModel)
+                Spacer(modifier = Modifier.height(20.dp))
+                LoginSection(navController  = navController)
             }
         }
     }
@@ -133,7 +142,7 @@ fun RegisterSection(
 
 @Composable
 fun SignUpRoleSelection(viewModel: SignUpViewModel, onRoleSelected: () -> Unit) {
-    val userType by viewModel.type.observeAsState(null)
+    val userType by viewModel.type.observeAsState("")
     var showDialog by remember { mutableStateOf(false) }
     Column(
         modifier = Modifier
@@ -165,7 +174,7 @@ fun SignUpRoleSelection(viewModel: SignUpViewModel, onRoleSelected: () -> Unit) 
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        if (userType != null) {
+        if (userType != "") {
             Button(
                 onClick = {
                     onRoleSelected()
@@ -299,6 +308,34 @@ fun SignUpForm(viewModel: SignUpViewModel, onRoleSelected: () -> Job) {
             )
         }
 
+    }
+}
+
+@Composable
+fun LoginSection(navController: NavController){
+    val annotatedString = buildAnnotatedString {
+        append(stringResource(id = R.string.auth_already_account) + " ")
+
+        pushStringAnnotation(tag = "login", annotation = "")
+        withStyle(
+            style = SpanStyle(
+                color = MaterialTheme.colorScheme.primary,
+                fontWeight = FontWeight.Bold,
+                textDecoration = TextDecoration.Underline
+            )
+        ) {
+            append(stringResource(id = R.string.auth_login_dialog))
+        }
+        pop()
+    }
+    Box(modifier = Modifier
+        .fillMaxWidth()
+        .padding(3.dp), contentAlignment = Alignment.Center){
+        ClickableText(text = annotatedString, onClick = { offset ->
+            annotatedString.getStringAnnotations(tag = "login", start = offset, end = offset).firstOrNull()?.let {
+                navController.popBackStack()
+            }
+        }, style = TextStyle(color = Color.Gray, fontStyle = FontStyle.Italic))
     }
 }
 

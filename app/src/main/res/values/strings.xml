@@ -22,7 +22,11 @@
     <string name="auth_success_register">Registro exitoso"</string>
     <string name="auth_register_name">Nombre</string>
     <string name="auth_register_confirm_password">Confirmar contraseña</string>
-    <string name="auth_no_account">¿No tienes una cuenta?</string>
+    <string name="auth_no_account">¿No tienes una cuenta? </string>
+    <string name="auth_already_account">Ya tengo una cuenta y quiero </string>
+    <string name="auth_login_dialog">Iniciar Sesión</string>
+
+
     <string name="auth_dialog_cancel">Cancelar</string>
     <string name="auth_dialog_confirm">Aceptar</string>
     <string name="auth_dialog_tittle">¡Necesitas una cuenta!</string>
@@ -53,8 +57,9 @@
     <!--StringResources for profileScreen-->
     <string name="notification_option_title">Notificaciones de la aplicación</string>
     <string name="notification_option_body">Cuando están activas podemos enviarte notificaciones sobre rentas cercanas con tus últimos intereses.</string>
-    <string name="student_verify_title">Verificar Perfil</string>
+    <string name="verify_title">Verificar Perfil</string>
     <string name="student_verify_body">Verifica que eres estudiante para tener acceso a todas las funciones</string>
+    <string name="owner_verify_body">Verifica que eres dueño de una propiedad para tener acceso a todas las funciones</string>
     <string name="Info_option_title">Información de la aplicación</string>
     <string name="Info_option_body">Esta aplicación está hecha por @LyonsTeam. Versión de la app: 2.0.0</string>
     <string name="Crash_Error_title">¿Todo bien?</string>
