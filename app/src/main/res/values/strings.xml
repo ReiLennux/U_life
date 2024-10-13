@@ -59,4 +59,9 @@
     <string name="Info_option_body">Esta aplicación está hecha por @LyonsTeam. Versión de la app: 2.0.0</string>
     <string name="Crash_Error_title">¿Todo bien?</string>
     <string name="Crash_Error_body">"Reporta un problema que haya ocurrido en la app."</string>
+
+    <!-- StringResources for permissions-->
+    <string name="bottom_sheet_restrictions">Restricciones</string>
+    <string name="bottom_sheet_services">Servicios incluidos</string>
+    <string name="bottom_sheet_images">Imágenes</string>
 </resources>

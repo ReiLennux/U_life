@@ -19,8 +19,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import mx.com.u_life.presentation.screens.home.content.HomeContent
+import mx.com.u_life.presentation.screens.home.content.HomeView
+import mx.com.u_life.presentation.screens.home.content.RentDetailsView
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
     navController: NavController
@@ -30,7 +31,9 @@ fun HomeScreen(
             var selectedIndex by remember { mutableIntStateOf(0) }
             val options = listOf("Cuartos", "Dptos.", "Casas")
             Box(
-                modifier = Modifier.fillMaxWidth().padding(32.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(32.dp),
                 contentAlignment = Alignment.Center
             ){
                 SingleChoiceSegmentedButtonRow {
@@ -49,5 +52,15 @@ fun HomeScreen(
         content = { innerPadding ->
             HomeContent(paddingValues = innerPadding, navController = navController)
         }
+    )
+
+    HomeView(
+        modifier = Modifier,
+        navController = navController
+    )
+
+    RentDetailsView(
+        modifier = Modifier,
+        navController = navController
     )
 }

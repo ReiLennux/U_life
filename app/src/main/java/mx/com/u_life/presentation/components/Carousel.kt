@@ -6,21 +6,28 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.carousel.HorizontalUncontainedCarousel
 import androidx.compose.material3.carousel.rememberCarouselState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
+import mx.com.u_life.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Carousel(
     items: List<String>,
-    width : Dp = 250.dp,
-    height : Dp = 200.dp
+    width: Dp = 250.dp,
+    height: Dp = 200.dp,
+    fallbackImage: Int = R.drawable.image_not_found
 ) {
     Column(
         modifier = Modifier.fillMaxWidth(),
@@ -38,19 +45,45 @@ fun Carousel(
                 .align(Alignment.CenterHorizontally)
         ) { index ->
             val value = items[index]
-            AsyncImage(
-                model = ImageRequest.Builder(LocalContext.current)
-                    .data(value)
-                    .crossfade(true)
-                    .build(),
-                contentDescription = null,
-                contentScale = ContentScale.Crop,
+            var isLoading by remember { mutableStateOf(true) }
+            var imageToShow by remember { mutableStateOf<Any>(value) }
+
+            Box(
                 modifier = Modifier
                     .height(height)
                     .fillMaxWidth()
-                    .maskClip(shape = MaterialTheme.shapes.extraLarge)
-            )
+            ) {
+                if (isLoading) {
+                    Box(
+                        modifier = Modifier
+                            .maskClip(shape = MaterialTheme.shapes.extraLarge)
+                            .height(height)
+                            .fillMaxWidth()
+                            .shimmerEffect()
+                    )
+                }
+
+                AsyncImage(
+                    model = ImageRequest.Builder(LocalContext.current)
+                        .data(imageToShow)
+                        .crossfade(true)
+                        .listener(
+                            onStart = { isLoading = true },
+                            onSuccess = { _, _ -> isLoading = false },
+                            onError = { _, _ ->
+                                isLoading = false
+                                imageToShow = fallbackImage
+                            }
+                        )
+                        .build(),
+                    contentDescription = null,
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .height(height)
+                        .fillMaxWidth()
+                        .maskClip(shape = MaterialTheme.shapes.extraLarge)
+                )
+            }
         }
     }
 }
-

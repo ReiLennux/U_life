@@ -7,6 +7,7 @@ import dagger.hilt.components.SingletonComponent
 import mx.com.u_life.data.repository.catalogs.CatalogsRepository
 import mx.com.u_life.data.repository.dataStore.DataStoreRepository
 import mx.com.u_life.data.repository.firebase.FireAuthRepository
+import mx.com.u_life.data.repository.rents.RentsRepository
 import mx.com.u_life.data.repository.user.UserRepository
 import mx.com.u_life.domain.useCases.catalogs.CatalogsUseCases
 import mx.com.u_life.domain.useCases.catalogs.GetPropertiesType
@@ -20,6 +21,9 @@ import mx.com.u_life.domain.useCases.dataStore.SetDataString
 import mx.com.u_life.domain.useCases.firebase.FireAuthUseCases
 import mx.com.u_life.domain.useCases.firebase.LoginUser
 import mx.com.u_life.domain.useCases.firebase.RegisterUser
+import mx.com.u_life.domain.useCases.rents.GetAllRents
+import mx.com.u_life.domain.useCases.rents.GetRentDetails
+import mx.com.u_life.domain.useCases.rents.RentsUseCases
 import mx.com.u_life.domain.useCases.userUseCases.GetUser
 import mx.com.u_life.domain.useCases.userUseCases.UserUseCases
 import javax.inject.Singleton
@@ -61,4 +65,11 @@ object AppModule {
             getUser = GetUser(userRepository)
         )
 
+    @Singleton
+    @Provides
+    fun provideRentsUseCases(rentsRepository: RentsRepository): RentsUseCases =
+        RentsUseCases(
+            getAllRents = GetAllRents(rentsRepository),
+            getRentDetails = GetRentDetails(rentsRepository)
+        )
 }

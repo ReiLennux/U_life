@@ -124,7 +124,7 @@ dependencies {
     implementation(libs.firebase.storage)
     implementation(libs.firebase.database)
     // Maps
-    implementation (libs.osmdroid.android)
+    implementation(libs.maps.compose)
 
     // Extended Icons
     implementation(libs.material.icons.extended)
@@ -137,5 +137,7 @@ dependencies {
     //Horizontal Pager
     implementation (libs.androidx.foundation)
 
+    //SplashScreen
+    implementation(libs.androidx.core.splashscreen)
 
 }

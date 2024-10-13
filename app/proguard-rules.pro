@@ -21,3 +21,4 @@
 #-renamesourcefileattribute SourceFile
 
 -keep class mx.com.u_life.data.network.*
+-keep class mx.com.u_life.domain.models.*
