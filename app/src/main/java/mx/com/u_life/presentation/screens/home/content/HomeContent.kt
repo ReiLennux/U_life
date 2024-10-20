@@ -3,23 +3,17 @@ package mx.com.u_life.presentation.screens.home.content
 import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
-import android.location.Location
 import android.util.Log
 import androidx.activity.compose.ManagedActivityResultLauncher
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
@@ -34,14 +28,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.GoogleMap
@@ -51,12 +41,7 @@ import com.google.maps.android.compose.rememberCameraPositionState
 import kotlinx.coroutines.launch
 import mx.com.u_life.R
 import mx.com.u_life.domain.models.rents.RentLocationModel
-import mx.com.u_life.domain.models.rents.RentModel
-import mx.com.u_life.domain.models.rents.UbicacionModel
-import mx.com.u_life.presentation.components.Carousel
 import mx.com.u_life.presentation.components.GenericCard
-import mx.com.u_life.presentation.components.GenericFeatureText
-import mx.com.u_life.presentation.components.GenericTitleFeatureText
 import mx.com.u_life.presentation.components.RentDetails
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -219,11 +204,11 @@ fun MapView(
         )
 
         rents.forEach { rent ->
-            val rentPosition = LatLng(rent.latitud, rent.longitud)
+            val rentPosition = LatLng(rent.latitude, rent.longitude)
 
             Marker(
                 state = MarkerState(rentPosition),
-                title = rent.nombre,
+                title = rent.name,
                 icon = viewModel.resizeMarkerIcon(R.drawable.rent_marker, 200, 200),
                 onClick = {
                     viewModel.enableBottomSheet(value = true, rentId = rent.id)

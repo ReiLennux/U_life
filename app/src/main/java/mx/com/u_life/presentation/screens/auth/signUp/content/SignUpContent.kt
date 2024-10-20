@@ -15,6 +15,8 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.AlternateEmail
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.School
 import androidx.compose.material3.Button
@@ -229,7 +231,7 @@ fun SignUpForm(viewModel: SignUpViewModel, onRoleSelected: () -> Job) {
                     SignUpFormEvent.NameChanged(it)
                 )
             },
-            leadingIcon = R.drawable.ic_person,
+            leadingIcon = Icons.Filled.AccountCircle,
             placeholder = R.string.auth_register_name,
             action = ImeAction.Next,
             errorMessage = nameError
@@ -243,7 +245,7 @@ fun SignUpForm(viewModel: SignUpViewModel, onRoleSelected: () -> Job) {
                     SignUpFormEvent.EmailChanged(it)
                 )
             },
-            leadingIcon = R.drawable.ic_email,
+            leadingIcon = Icons.Filled.AlternateEmail,
             placeholder = R.string.auth_login_email,
             action = ImeAction.Next,
             errorMessage = emailError

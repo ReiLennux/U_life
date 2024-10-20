@@ -11,6 +11,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.text.ClickableText
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AlternateEmail
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -88,7 +90,7 @@ fun LoginForm(navController: NavController, viewModel: LoginViewModel) {
                     LoginFormEvent.EmailChanged(it),
                 )
             },
-            leadingIcon = R.drawable.ic_email,
+            leadingIcon = Icons.Filled.AlternateEmail,
             placeholder = R.string.auth_login_email,
             action = ImeAction.Next,
             errorMessage = emailError

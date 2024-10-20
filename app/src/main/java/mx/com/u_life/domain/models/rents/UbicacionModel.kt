@@ -1,6 +1,7 @@
 package mx.com.u_life.domain.models.rents
 
-data class UbicacionModel(
-    val latitud: Double = 0.0,
-    val longitud: Double = 0.0
+data class LocationModel(
+    val latitude: Double = 0.0,
+    val longitude: Double = 0.0,
+    val address: String = ""
 )
