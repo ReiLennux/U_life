@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import mx.com.u_life.presentation.screens.owner_screens.addproperty.content.AddPropertyContent
+import mx.com.u_life.presentation.screens.owner_screens.addproperty.content.AddPropertyPostView
 import mx.com.u_life.presentation.screens.owner_screens.addproperty.content.AddPropertyView
 
 @Composable
@@ -22,5 +23,9 @@ fun AddPropertyScreen(
     )
     AddPropertyView(
         modifier = Modifier.fillMaxSize(),
+    )
+    AddPropertyPostView(
+        navController = navController,
+        modifier = Modifier.fillMaxSize()
     )
 }
