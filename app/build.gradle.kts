@@ -140,4 +140,8 @@ dependencies {
     //SplashScreen
     implementation(libs.androidx.core.splashscreen)
 
+    //Images
+    implementation (libs.coil.compose.v222)
+    implementation (libs.androidx.activity.compose.v131)
+
 }

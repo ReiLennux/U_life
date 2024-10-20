@@ -1,5 +1,6 @@
 package mx.com.u_life.presentation.components
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -11,18 +12,21 @@ import androidx.compose.material.icons.rounded.ExpandMore
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import mx.com.u_life.domain.models.generic.GenericCatalogModel
 
+
 @Composable
-fun DefaultDropDownMenu(
+fun GenericDropDownMenu(
     modifier: Modifier,
-    label: String,
+    @StringRes label: Int,
     selectedText: String,
     isExpanded: Boolean,
     isEnabled: Boolean = false, //tap
@@ -32,6 +36,7 @@ fun DefaultDropDownMenu(
     onSelectedItem: (GenericCatalogModel) -> Unit,
     onShowRequestAction: () -> Unit,
     onDismissRequestAction: () -> Unit,
+    errorMessage: String? = null
 ) {
     val icon = if (isExpanded) Icons.Rounded.ExpandLess else Icons.Rounded.ExpandMore
 
@@ -41,19 +46,24 @@ fun DefaultDropDownMenu(
             verticalAlignment = Alignment.CenterVertically
         ) {
             OutlinedTextField(
-                modifier = Modifier
+                modifier = modifier
                     .clickable { onShowRequestAction() }
                     .weight(1f),
                 value = selectedText,
-                onValueChange = {
-                    onValueChangeAction(it)
-                },
-                enabled = isEnabled,
+                onValueChange = { onValueChangeAction(it) },
+                enabled = isEnabled,  // Controla si se puede hacer clic
                 readOnly = isReadOnly,
-                label = { Text(text = label) },
-                trailingIcon = {
-                    Icon(imageVector = icon, contentDescription = null)
-                }
+                label = { Text(text = stringResource(id = label))  },
+                trailingIcon = { Icon(imageVector = icon, contentDescription = null) },
+                isError = errorMessage != null,
+            )
+        }
+        errorMessage?.let {
+            Text(
+                text = errorMessage,
+                color = MaterialTheme.colorScheme.error,
+                style = MaterialTheme.typography.bodySmall,
+                modifier = Modifier.padding(start = 16.dp, top = 4.dp)
             )
         }
 

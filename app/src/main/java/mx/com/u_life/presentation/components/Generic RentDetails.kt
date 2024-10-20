@@ -57,30 +57,32 @@ fun RentDetails(
                 Spacer(modifier = Modifier.height(8.dp))
             } else {
                 GenericTitleFeatureText(
-                    text = rent?.nombre ?: "",
+                    text = rent?.name ?: "",
                     style = MaterialTheme.typography.bodyLarge
                 )
                 GenericTitleFeatureText(
-                    text = rent?.descripcion ?: "",
+                    text = rent?.description ?: "",
                     style = MaterialTheme.typography.bodyMedium
                 )
                 GenericFeatureText(
                     icon = R.drawable.ic_money,
-                    text = "${rent?.costoMensual ?: 0} MXN"
+                    text = "${rent?.price ?: 0} MXN"
                 )
                 GenericTitleFeatureText(
                     text = stringResource(id = R.string.bottom_sheet_restrictions),
                     style = MaterialTheme.typography.bodyLarge
                 )
-                GenericFeatureText(
-                    icon = R.drawable.ic_restriction,
-                    text = rent?.restricciones ?: ""
-                )
+                rent?.restrictions!!.forEach {
+                    GenericFeatureText(
+                        icon = R.drawable.ic_restriction,
+                        text = it
+                    )
+                }
                 GenericTitleFeatureText(
                     text = stringResource(id = R.string.bottom_sheet_services),
                     style = MaterialTheme.typography.bodyLarge
                 )
-                rent?.serviciosIncluidos!!.forEach {
+                rent.services.forEach {
                     GenericFeatureText(
                         icon = R.drawable.ic_info,
                         text = it
@@ -91,7 +93,7 @@ fun RentDetails(
                     style = MaterialTheme.typography.bodyLarge
                 )
                 Carousel(
-                    items = rent.imagenes,
+                    items = rent.images,
                     width = this@BoxWithConstraints.maxWidth,
                     height = 300.dp
                 )

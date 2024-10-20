@@ -69,4 +69,33 @@
     <string name="bottom_sheet_restrictions">Restricciones</string>
     <string name="bottom_sheet_services">Servicios incluidos</string>
     <string name="bottom_sheet_images">Imágenes</string>
+
+
+    <!-- StringResources for addProperty-->
+    <string name="add_property_title">Registra una propiedad</string>
+    <string name="add_property_description">Cuentanos mas acerca de que es lo que rentas</string>
+    <string name="property_name">Nombre de la propiedad</string>
+    <string name="property_address">Direccion</string>
+    <string name="property_price">Renta mensual</string>
+    <string name="property_description">Descripcion</string>
+    <string name="property_type">Tipo de propiedad</string>
+    <string name="property_facilities_title">Amenidades</string>
+    <string name="property_facilities_body">Agrega Amenidades</string>
+    <string name="property_restrictions_title">Restricciones</string>
+    <string name="property_restrictions_body">Agrega Restricciones</string>
+    <string name="property_images">Agrega imagenes</string>
+    <string name="property_save">Guardar</string>
+    <string name="property_next">Siguiente</string>
+    <string name="property_cancel">Cancelar</string>
+    <string name="property_back">Regresar</string>
+    <string name="property_success_title">Propiedad Agregada</string>
+    <string name="property_success_body">La propiedad se ha agregado correctamente.</string>"
+    <string name="property_error_title">Ha ocurrido un problema</string>
+    <string name="property_error_body">Ocurrio un error al intentar subir esta propiedad, por favor intenta mas tarde</string>
+
+
+
+    <!-- Generic StringResources for Services-->
+    <string name="generic_error_1">Ocurrio un error al obtener la informacion solicitada</string>"
+
 </resources>

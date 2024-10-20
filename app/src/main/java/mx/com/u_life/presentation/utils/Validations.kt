@@ -1,6 +1,7 @@
 package mx.com.u_life.presentation.utils
 
 import android.content.Context
+import android.net.Uri
 import android.util.Patterns
 import dagger.hilt.android.qualifiers.ApplicationContext
 import mx.com.u_life.R
@@ -189,4 +190,80 @@ class Validations @Inject constructor(
             successful = true
         )
     }
+
+    // Validación precio
+    fun validatePrice(price: Int): ValidationResult {
+        if (price < 100) {
+            return ValidationResult(
+                successful = false,
+                errorMessage = "El precio no puede ser menor a $100 MXN."
+            )
+        }
+        if (price > Int.MAX_VALUE) {
+            return ValidationResult(
+                successful = false,
+                errorMessage = "El precio no puede exceder el valor máximo permitido."
+            )
+        }
+        return ValidationResult(
+            successful = true
+        )
+    }
+
+    // Validación Image
+    fun  validateImagesList(images: List<Uri>): ValidationResult {
+        return if (images.isEmpty()) {
+            ValidationResult(
+                successful = false,
+                errorMessage = "Debe subir al menos una imagen."
+            )
+        }else {
+            ValidationResult(
+                successful = true
+            )
+        }
+    }
+
+    fun validateList(list: List<String>): ValidationResult {
+        return if (list.isEmpty()) {
+            ValidationResult(
+                successful = false,
+                errorMessage = "Debe tener al menos 3 elementos en la lista."
+            )
+        } else {
+            ValidationResult(
+                successful = true
+            )
+        }
+    }
+
+    fun validateComboBox(selected : String): ValidationResult {
+        return if (selected.isEmpty()) {
+            ValidationResult(
+                successful = false,
+                errorMessage = "Debe seleccionar una opción."
+            )
+        }else {
+            ValidationResult(
+                successful = true
+            )
+        }
+    }
+
+    fun validateLocation(longitude: Double, latitude: Double): ValidationResult {
+        return when {
+            longitude == 0.0 && latitude == 0.0 -> {
+                ValidationResult(
+                    successful = false,
+                    errorMessage = "Debe seleccionar una ubicación."
+                )
+            }
+            else -> {
+                ValidationResult(successful = true)
+            }
+        }
+    }
+
+
+
 }

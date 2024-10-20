@@ -1,9 +1,9 @@
 package mx.com.u_life.presentation.components
 
-import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Icon
@@ -11,19 +11,12 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import mx.com.u_life.R
 
 /**
  * Componente genérico para un campo de texto personalizable en Jetpack Compose.
@@ -44,26 +37,29 @@ fun GenericTextField(
     modifier: Modifier = Modifier,
     value: String,
     onValueChange: (String) -> Unit,
-    @DrawableRes leadingIcon: Int? = null,
+    leadingIcon: ImageVector? = null,
     keyboardType: KeyboardType = KeyboardType.Text,
     @StringRes placeholder: Int,
     action: ImeAction = ImeAction.Default,
-    errorMessage: String? = null
+    errorMessage: String? = null,
+    maxLines: Int = 1,
+    minLines: Int = 1
 ) {
     OutlinedTextField(
         value = value,
         onValueChange = { onValueChange(it) },
         modifier = modifier.fillMaxWidth(),
-        placeholder = { Text(text = stringResource(id = placeholder)) },
+        label = { Text(text = stringResource(id = placeholder)) },
         keyboardOptions = KeyboardOptions.Default.copy(
             keyboardType = keyboardType,
             imeAction = action
         ),
         singleLine = true,
-        maxLines = 1,
+        maxLines = maxLines,
+        minLines = minLines,
         leadingIcon = leadingIcon?.let {
             {
-                Icon(painter = painterResource(id = leadingIcon), contentDescription = "")
+                Icon(imageVector =  leadingIcon, contentDescription = "")
             }
         },
         isError = errorMessage != null,
@@ -77,26 +73,10 @@ fun GenericTextField(
             modifier = Modifier.padding(start = 16.dp, top = 4.dp)
         )
     }
-}
+    Spacer(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(6.dp)
+    )
 
-@Preview
-@Composable
-fun PreviewTextFieldGeneric() {
-    var textFieldValue by remember { mutableStateOf("") }
-    var errorMessage by remember { mutableStateOf<String?>(null) }
-
-    Column {
-        GenericTextField(
-            value = textFieldValue,
-            leadingIcon = R.drawable.send_message,
-            onValueChange = {
-                textFieldValue = it
-                errorMessage = if (it.isEmpty()) "Este campo no puede estar vacío" else null
-            },
-            keyboardType = KeyboardType.Text,
-            placeholder = R.string.app_name,
-            action = ImeAction.Done,
-            errorMessage = errorMessage
-        )
-    }
 }
