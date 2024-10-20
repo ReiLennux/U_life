@@ -23,6 +23,7 @@ import mx.com.u_life.domain.useCases.firebase.LoginUser
 import mx.com.u_life.domain.useCases.firebase.RegisterUser
 import mx.com.u_life.domain.useCases.rents.GetAllRents
 import mx.com.u_life.domain.useCases.rents.GetRentDetails
+import mx.com.u_life.domain.useCases.rents.PostRent
 import mx.com.u_life.domain.useCases.rents.RentsUseCases
 import mx.com.u_life.domain.useCases.userUseCases.GetUser
 import mx.com.u_life.domain.useCases.userUseCases.UserUseCases
@@ -70,6 +71,7 @@ object AppModule {
     fun provideRentsUseCases(rentsRepository: RentsRepository): RentsUseCases =
         RentsUseCases(
             getAllRents = GetAllRents(rentsRepository),
-            getRentDetails = GetRentDetails(rentsRepository)
+            getRentDetails = GetRentDetails(rentsRepository),
+            postRent = PostRent(rentsRepository)
         )
 }

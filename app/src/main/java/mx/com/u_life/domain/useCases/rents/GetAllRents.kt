@@ -1,6 +1,5 @@
 package mx.com.u_life.domain.useCases.rents
 
-import mx.com.u_life.data.repository.firebase.FireAuthRepository
 import mx.com.u_life.data.repository.rents.RentsRepository
 import mx.com.u_life.domain.models.Response
 import mx.com.u_life.domain.models.rents.RentLocationModel
