@@ -11,7 +11,8 @@ data class RentModel(
     val restrictions: List<String> = emptyList(),
     val services: List<String> = emptyList(),
     val location: LocationModel? = null,
-    val type: String = ""
+    val type: String = "",
+    val state: String = ""
 )
 
 data class TemporalRentModel(
@@ -23,5 +24,7 @@ data class TemporalRentModel(
     val restrictions: List<String> = emptyList(),
     val services: List<String> = emptyList(),
     val location: LocationModel? = null,
-    val type: String = ""
+    val type: String = "",
+    val state: String = ""
+
 )

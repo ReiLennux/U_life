@@ -1,5 +1,6 @@
 package mx.com.u_life.presentation.screens.owner_screens.home
 
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -13,9 +14,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import mx.com.u_life.presentation.enums.OwnerRoutes
 import mx.com.u_life.presentation.screens.owner_screens.home.content.HomeContent
+import mx.com.u_life.presentation.screens.owner_screens.home.content.HomeView
 
 @Composable
 fun OwnerHomeScreen(
@@ -38,4 +41,5 @@ fun OwnerHomeScreen(
             )
         }
     )
+    HomeView(modifier = Modifier.fillMaxSize())
 }

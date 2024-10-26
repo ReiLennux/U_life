@@ -84,7 +84,8 @@ class RentsService @Inject constructor(
             restrictions = rent.restrictions,
             services = rent.services,
             location = rent.location,
-            type = rent.type
+            type = rent.type,
+            state = "Disponible"
         )
 
         return try {
@@ -96,5 +97,22 @@ class RentsService @Inject constructor(
             Response.Error(e)
         }
     }
+
+    suspend fun getMyRents(ownerId: String): Response<List<RentModel>> {
+        return try {
+            val rentList = _fireStore.collection("Rentas")
+                .whereEqualTo("ownerId", ownerId)
+                .get()
+                .await()
+
+            val rents = rentList.documents.map { document ->
+                document.toObject(RentModel::class.java)!!
+            }
+            Response.Success(rents)
+        } catch (e: Exception) {
+            Response.Error(e)
+        }
+    }
+
 
 }

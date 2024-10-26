@@ -22,6 +22,7 @@ import mx.com.u_life.domain.useCases.firebase.FireAuthUseCases
 import mx.com.u_life.domain.useCases.firebase.LoginUser
 import mx.com.u_life.domain.useCases.firebase.RegisterUser
 import mx.com.u_life.domain.useCases.rents.GetAllRents
+import mx.com.u_life.domain.useCases.rents.GetMyRents
 import mx.com.u_life.domain.useCases.rents.GetRentDetails
 import mx.com.u_life.domain.useCases.rents.PostRent
 import mx.com.u_life.domain.useCases.rents.RentsUseCases
@@ -72,6 +73,7 @@ object AppModule {
         RentsUseCases(
             getAllRents = GetAllRents(rentsRepository),
             getRentDetails = GetRentDetails(rentsRepository),
-            postRent = PostRent(rentsRepository)
+            postRent = PostRent(rentsRepository),
+            getMyRents = GetMyRents(rentsRepository)
         )
 }

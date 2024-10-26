@@ -119,7 +119,7 @@ fun GenericPropertiesCard(
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surface,
         ),
-        elevation = CardDefaults.cardElevation(10.dp),
+        elevation = CardDefaults.cardElevation(5.dp),
     ) {
         Column(
             modifier = Modifier

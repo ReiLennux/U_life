@@ -25,4 +25,11 @@ class RentsRepository @Inject constructor(
         return success
     }
 
+    suspend fun getMyRents(ownerId: String): Response<List<RentModel>> {
+        val success = _rentsService.getMyRents(ownerId)
+        return success
+
+    }
+
+
 }
