@@ -5,7 +5,7 @@ import android.net.Uri
 sealed class AddPropertyFormEvent {
     data class PropertyNameChanged(val propertyName: String): AddPropertyFormEvent()
     data class PropertyDescriptionChanged(val propertyDescription: String): AddPropertyFormEvent()
-    data class PropertyPriceChanged(val propertyPrice: Int): AddPropertyFormEvent()
+    data class PropertyPriceChanged(val propertyPrice: String): AddPropertyFormEvent()
     data class PropertyImagesChanged(val propertyImages: List<Uri>): AddPropertyFormEvent()
     data class PropertyRestrictionsChanged(val propertyRestrictions: List<String>): AddPropertyFormEvent()
     data class PropertyFacilitiesChanged(val propertyFacilities: List<String>): AddPropertyFormEvent()

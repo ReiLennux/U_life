@@ -11,7 +11,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -65,7 +64,6 @@ import mx.com.u_life.presentation.components.GenericTextField
 
 @Composable
 fun AddPropertyContent(
-    paddingValues: PaddingValues,
     viewModel: AddPropertyViewModel = hiltViewModel(),
     navController: NavController
 ) {
@@ -74,7 +72,6 @@ fun AddPropertyContent(
     Column(
         modifier = Modifier
             .verticalScroll(scrollState)
-            //.padding(paddingValues = paddingValues)
     ) {
         Column(
             modifier = Modifier.fillMaxSize(),
@@ -235,7 +232,7 @@ fun PropertyInfo(viewModel: AddPropertyViewModel) {
             locationPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
         } else {
             scope.launch {
-                val location = locationHelper.getLastKnownLocation()
+                val location = viewModel.fetchLocation()
                 if (location != null) {
                     viewModel.onEvent(
                         AddPropertyFormEvent.PropertyLocationChanged(location.latitude, location.longitude)
@@ -290,10 +287,10 @@ fun PropertyInfo(viewModel: AddPropertyViewModel) {
     )
 
     GenericTextField(
-        value = price.toString(),
+        value = price,
         onValueChange = {
             viewModel.onEvent(
-                AddPropertyFormEvent.PropertyPriceChanged(it.toInt())
+                AddPropertyFormEvent.PropertyPriceChanged(it)
             )
         },
         leadingIcon = Icons.Filled.AttachMoney,

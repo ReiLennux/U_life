@@ -1,5 +1,6 @@
 package mx.com.u_life.presentation.screens.owner_screens.home
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
@@ -20,6 +21,7 @@ import mx.com.u_life.presentation.enums.OwnerRoutes
 import mx.com.u_life.presentation.screens.owner_screens.home.content.HomeContent
 import mx.com.u_life.presentation.screens.owner_screens.home.content.HomeView
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun OwnerHomeScreen(
     navController: NavController
@@ -28,8 +30,8 @@ fun OwnerHomeScreen(
     val expandedFab by remember { derivedStateOf { listState.firstVisibleItemIndex == 0 } }
 
     Scaffold(
-        content = { innerPadding ->
-            HomeContent(paddingValues = innerPadding, navController = navController, listState = listState)
+        content = { _ ->
+            HomeContent( navController = navController, listState = listState)
         },
         floatingActionButton = {
             ExtendedFloatingActionButton(

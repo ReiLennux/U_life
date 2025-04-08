@@ -1,5 +1,6 @@
 package mx.com.u_life.presentation.screens.owner_screens.addproperty
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -9,14 +10,14 @@ import mx.com.u_life.presentation.screens.owner_screens.addproperty.content.AddP
 import mx.com.u_life.presentation.screens.owner_screens.addproperty.content.AddPropertyPostView
 import mx.com.u_life.presentation.screens.owner_screens.addproperty.content.AddPropertyView
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun AddPropertyScreen(
     navController: NavController
 ){
     Scaffold (
-        content = { innerPadding ->
+        content = {
             AddPropertyContent(
-                paddingValues = innerPadding,
                 navController = navController
             )
         }

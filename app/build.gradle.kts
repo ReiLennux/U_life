@@ -68,6 +68,7 @@ dependencies {
 
     implementation(libs.androidx.runtime.livedata)
     implementation(libs.volley)
+    implementation(libs.androidx.foundation.android)
     //implementation(libs.play.maps)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

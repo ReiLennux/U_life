@@ -65,8 +65,8 @@ class AddPropertyViewModel @Inject constructor(
     private val _propertyDescription = MutableLiveData("")
     val propertyDescription: LiveData<String> = _propertyDescription
 
-    private val _propertyPrice = MutableLiveData(0)
-    val propertyPrice: LiveData<Int> = _propertyPrice
+    private val _propertyPrice = MutableLiveData("")
+    val propertyPrice: LiveData<String> = _propertyPrice
 
     private val _propertyImages = MutableLiveData<List<Uri>>(emptyList())
 
@@ -231,7 +231,7 @@ class AddPropertyViewModel @Inject constructor(
                 ownerId = _fireAuth.currentUser!!.uid,
                 name = _propertyName.value!!,
                 description = _propertyDescription.value!!,
-                price = _propertyPrice.value!!,
+                price = _propertyPrice.value!!.toInt(),
                 images = _propertyImages.value!!.map { it },
                 restrictions = _propertyRestrictions.value!!,
                 services = _propertyFacilities.value!!,
