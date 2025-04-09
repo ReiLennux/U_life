@@ -6,10 +6,10 @@ import androidx.navigation.compose.composable
 import mx.com.u_life.presentation.enums.Routes
 import mx.com.u_life.presentation.screens.auth.login.LoginScreen
 import mx.com.u_life.presentation.screens.auth.signUp.SignUpScreen
-import mx.com.u_life.presentation.screens.conversations.chats.ChatScreen
-import mx.com.u_life.presentation.screens.conversations.inbox.InboxScreen
-import mx.com.u_life.presentation.screens.home.HomeScreen
-import mx.com.u_life.presentation.screens.profile.ProfileScreen
+import mx.com.u_life.presentation.screens.tenant_screens.conversations.chats.ChatScreen
+import mx.com.u_life.presentation.screens.tenant_screens.conversations.inbox.InboxScreen
+import mx.com.u_life.presentation.screens.tenant_screens.home.HomeScreen
+import mx.com.u_life.presentation.screens.tenant_screens.profile.ProfileScreen
 
 fun NavGraphBuilder.studentRoutes(navController: NavController, isLoggedIn: Boolean) {
     composable(Routes.HOME.name) { HomeScreen(navController) }

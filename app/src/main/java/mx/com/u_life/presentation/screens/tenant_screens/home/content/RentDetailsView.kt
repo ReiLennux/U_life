@@ -1,4 +1,4 @@
-package mx.com.u_life.presentation.screens.home.content
+package mx.com.u_life.presentation.screens.tenant_screens.home.content
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize

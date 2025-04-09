@@ -1,4 +1,4 @@
-package mx.com.u_life.presentation.screens.home
+package mx.com.u_life.presentation.screens.tenant_screens.home
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -22,10 +22,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import mx.com.u_life.presentation.screens.home.content.HomeContent
-import mx.com.u_life.presentation.screens.home.content.HomeView
-import mx.com.u_life.presentation.screens.home.content.HomeViewModel
-import mx.com.u_life.presentation.screens.home.content.RentDetailsView
+import mx.com.u_life.presentation.screens.tenant_screens.home.content.HomeContent
+import mx.com.u_life.presentation.screens.tenant_screens.home.content.HomeView
+import mx.com.u_life.presentation.screens.tenant_screens.home.content.HomeViewModel
+import mx.com.u_life.presentation.screens.tenant_screens.home.content.RentDetailsView
 
 @Composable
 fun HomeScreen(

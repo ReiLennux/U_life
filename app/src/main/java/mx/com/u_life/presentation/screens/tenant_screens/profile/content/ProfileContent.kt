@@ -1,4 +1,4 @@
-package mx.com.u_life.presentation.screens.profile.content
+package mx.com.u_life.presentation.screens.tenant_screens.profile.content
 
 
 import android.content.ActivityNotFoundException

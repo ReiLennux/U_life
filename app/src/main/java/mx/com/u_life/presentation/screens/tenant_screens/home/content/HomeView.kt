@@ -1,4 +1,4 @@
-package mx.com.u_life.presentation.screens.home.content
+package mx.com.u_life.presentation.screens.tenant_screens.home.content
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.Box

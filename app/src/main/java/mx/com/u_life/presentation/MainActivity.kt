@@ -14,7 +14,7 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.hilt.navigation.compose.hiltViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import mx.com.u_life.presentation.screens.MainScreen
-import mx.com.u_life.presentation.screens.home.content.HomeViewModel
+import mx.com.u_life.presentation.screens.tenant_screens.home.content.HomeViewModel
 import mx.com.u_life.presentation.ui.theme.ULifeTheme
 
 @AndroidEntryPoint

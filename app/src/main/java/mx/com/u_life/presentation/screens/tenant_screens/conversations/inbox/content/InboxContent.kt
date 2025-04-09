@@ -1,4 +1,4 @@
-package mx.com.u_life.presentation.screens.conversations.inbox.content
+package mx.com.u_life.presentation.screens.tenant_screens.conversations.inbox.content
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
