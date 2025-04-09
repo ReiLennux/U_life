@@ -35,10 +35,20 @@ class HomeViewModel @Inject constructor(
     @ApplicationContext private val context: Context
 ) : AndroidViewModel(application) {
 
+    val types = mapOf(
+        0 to "Todos",
+        1 to "Cuarto",
+        2 to "Departamento",
+        3 to "Casa"
+    )
+
     private val fusedLocationClient: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(application)
 
     private val _rentsResponse = MutableStateFlow<Response<List<RentLocationModel>>?>(value = null)
     val rentsResponse: StateFlow<Response<List<RentLocationModel>>?> = _rentsResponse
+
+    private val _selectedType = MutableStateFlow("Todos")
+    val selectedType: StateFlow<String> = _selectedType
 
     private val _rentDetailResponse = MutableStateFlow<Response<RentModel>?>(value = null)
     val rentDetailResponse: StateFlow<Response<RentModel>?> = _rentDetailResponse
@@ -100,6 +110,10 @@ class HomeViewModel @Inject constructor(
         _rentsResponse.value = response
         _rentsReady = true
     }.await()
+
+    fun filterTypes(value: String){
+        _selectedType.value = value
+    }
 
     fun assignRentsResult(rents: List<RentLocationModel>) {
         _rents.value = rents

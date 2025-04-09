@@ -1,6 +1,7 @@
 package mx.com.u_life.presentation.screens.home.content
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
 import android.util.Log
@@ -19,6 +20,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
@@ -169,6 +171,7 @@ fun UbicationPermissions(
 
 
 
+@SuppressLint("StateFlowValueCalledInComposition")
 @Composable
 fun MapView(
     rents: List<RentLocationModel> = emptyList(),
@@ -203,7 +206,17 @@ fun MapView(
             icon = viewModel.resizeMarkerIcon(R.drawable.user_marker, 200, 200),
         )
 
-        rents.forEach { rent ->
+        val selectedType by viewModel.selectedType.collectAsState()
+
+        val filteredRents = if (selectedType == "Todos") {
+            rents
+        } else {
+            rents.filter { it.type == selectedType }
+        }
+        println("Aqui todas las rentas: $filteredRents")
+
+
+        filteredRents.forEach { rent ->
             val rentPosition = LatLng(rent.latitude, rent.longitude)
 
             Marker(
@@ -211,7 +224,7 @@ fun MapView(
                 title = rent.name,
                 icon = viewModel.resizeMarkerIcon(R.drawable.rent_marker, 200, 200),
                 onClick = {
-                    viewModel.enableBottomSheet(value = true, rentId = rent.id)
+                    viewModel.enableBottomSheet(value = true, rentId =rent.id)
                     true
                 }
             )

@@ -26,9 +26,10 @@ class RentsService @Inject constructor(
                     val latitude = document.getDouble("location.latitude")
                     val longitude = document.getDouble("location.longitude")
                     val id = document.id
+                    val type = document.getString("type")
 
                     if (latitude != null && longitude != null) {
-                        RentLocationModel(id = id, latitude = latitude, longitude = longitude, name = name ?: "")
+                        RentLocationModel(id = id, latitude = latitude, longitude = longitude, name = name ?: "", type = type!! )
                     } else {
                         null
                     }

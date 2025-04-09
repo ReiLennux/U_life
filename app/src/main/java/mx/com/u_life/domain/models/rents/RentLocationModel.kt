@@ -4,5 +4,6 @@ data class RentLocationModel(
     val id: String,
     val name: String,
     val latitude: Double,
-    val longitude: Double
+    val longitude: Double,
+    val type: String,
 )
