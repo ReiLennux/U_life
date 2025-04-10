@@ -1,7 +1,6 @@
 package mx.com.u_life.presentation.screens.tenant_screens.home.content
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
 import android.util.Log
@@ -15,12 +14,12 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
@@ -36,12 +35,15 @@ import androidx.navigation.NavController
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.maps.android.compose.GoogleMap
+import com.google.maps.android.compose.MapProperties
 import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.MarkerState
 import com.google.maps.android.compose.rememberCameraPositionState
 import kotlinx.coroutines.launch
 import mx.com.u_life.R
+import mx.com.u_life.domain.models.properties.PropertyTypeModel
 import mx.com.u_life.domain.models.rents.RentLocationModel
 import mx.com.u_life.presentation.components.GenericCard
 import mx.com.u_life.presentation.components.RentDetails
@@ -171,7 +173,6 @@ fun UbicationPermissions(
 
 
 
-@SuppressLint("StateFlowValueCalledInComposition")
 @Composable
 fun MapView(
     rents: List<RentLocationModel> = emptyList(),
@@ -186,6 +187,16 @@ fun MapView(
         position = CameraPosition.fromLatLngZoom(defaultPosition, 5f)
     }
 
+    val primaryColor = MaterialTheme.colorScheme.outline
+    val backgroundColor = MaterialTheme.colorScheme.background
+    val textColor = MaterialTheme.colorScheme.onBackground
+
+    val mapStyle = remember(primaryColor, backgroundColor) {
+        val styleJson = viewModel.generateMapStyle(primaryColor, backgroundColor, textColor)
+        MapStyleOptions(styleJson)
+    }
+
+
     LaunchedEffect(location) {
         location?.let {
             val newUserPosition = LatLng(it.latitude, it.longitude)
@@ -198,7 +209,11 @@ fun MapView(
 
     GoogleMap(
         modifier = Modifier.fillMaxSize(),
-        cameraPositionState = cameraPositionState
+        cameraPositionState = cameraPositionState,
+        properties = MapProperties(
+            isMyLocationEnabled = false,
+            mapStyleOptions = mapStyle
+        ),
     ) {
         Marker(
             state = MarkerState(userPosition),
@@ -206,15 +221,13 @@ fun MapView(
             icon = viewModel.resizeMarkerIcon(R.drawable.user_marker, 200, 200),
         )
 
-        val selectedType by viewModel.selectedType.collectAsState()
+        val selectedType by viewModel.selectedType.observeAsState(initial = PropertyTypeModel(id="", name = "Todos"))
 
-        val filteredRents = if (selectedType == "Todos") {
+        val filteredRents = if (selectedType == null) {
             rents
         } else {
-            rents.filter { it.type == selectedType }
+            rents.filter { it.type == selectedType!!.name }
         }
-        println("Aqui todas las rentas: $filteredRents")
-
 
         filteredRents.forEach { rent ->
             val rentPosition = LatLng(rent.latitude, rent.longitude)
@@ -224,10 +237,12 @@ fun MapView(
                 title = rent.name,
                 icon = viewModel.resizeMarkerIcon(R.drawable.rent_marker, 200, 200),
                 onClick = {
-                    viewModel.enableBottomSheet(value = true, rentId =rent.id)
+                    viewModel.enableBottomSheet(value = true, rentId = rent.id)
                     true
                 }
             )
         }
     }
 }
+
+

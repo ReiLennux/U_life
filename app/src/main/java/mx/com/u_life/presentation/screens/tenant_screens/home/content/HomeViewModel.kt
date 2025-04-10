@@ -5,6 +5,7 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.location.Location
+import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -23,8 +24,10 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import mx.com.u_life.domain.models.Response
+import mx.com.u_life.domain.models.properties.PropertyTypeModel
 import mx.com.u_life.domain.models.rents.RentLocationModel
 import mx.com.u_life.domain.models.rents.RentModel
+import mx.com.u_life.domain.useCases.catalogs.CatalogsUseCases
 import mx.com.u_life.domain.useCases.rents.RentsUseCases
 import javax.inject.Inject
 
@@ -32,23 +35,23 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     application: Application,
     private val _rentsUseCases: RentsUseCases,
+    private val propertiesTypeUseCases: CatalogsUseCases,
     @ApplicationContext private val context: Context
 ) : AndroidViewModel(application) {
 
-    val types = mapOf(
-        0 to "Todos",
-        1 to "Cuarto",
-        2 to "Departamento",
-        3 to "Casa"
-    )
+    private val _types = MutableLiveData<List<PropertyTypeModel>>()
+    val types: LiveData<List<PropertyTypeModel>> = _types
+
+    private val _typesResponse = MutableStateFlow<Response<List<PropertyTypeModel>>?>(value = null)
+    val typesResponse: MutableStateFlow<Response<List<PropertyTypeModel>>?> = _typesResponse
 
     private val fusedLocationClient: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(application)
 
     private val _rentsResponse = MutableStateFlow<Response<List<RentLocationModel>>?>(value = null)
     val rentsResponse: StateFlow<Response<List<RentLocationModel>>?> = _rentsResponse
 
-    private val _selectedType = MutableStateFlow("Todos")
-    val selectedType: StateFlow<String> = _selectedType
+    private val _selectedType = MutableLiveData<PropertyTypeModel?>(null)
+    val selectedType: LiveData<PropertyTypeModel?> = _selectedType
 
     private val _rentDetailResponse = MutableStateFlow<Response<RentModel>?>(value = null)
     val rentDetailResponse: StateFlow<Response<RentModel>?> = _rentDetailResponse
@@ -77,7 +80,20 @@ class HomeViewModel @Inject constructor(
             fetchLocation()
             getAllRents()
             checkAllReady()
+            getTypes()
         }
+    }
+
+    private fun getTypes() {
+        viewModelScope.launch {
+            _typesResponse.value = Response.Loading
+            val response = propertiesTypeUseCases.getPropertiesType.invoke()
+            _typesResponse.value = response
+        }
+    }
+
+    fun assignTypes(types: List<PropertyTypeModel>) {
+        _types.value = types
     }
 
     private fun checkAllReady() {
@@ -111,8 +127,8 @@ class HomeViewModel @Inject constructor(
         _rentsReady = true
     }.await()
 
-    fun filterTypes(value: String){
-        _selectedType.value = value
+    fun filterTypes(type: PropertyTypeModel?){
+        _selectedType.value = type
     }
 
     fun assignRentsResult(rents: List<RentLocationModel>) {
@@ -121,6 +137,10 @@ class HomeViewModel @Inject constructor(
 
     fun resetRents() {
         _rentsResponse.value = null
+    }
+
+    fun resetTypes() {
+        _typesResponse.value = null
     }
 
     fun resetRentDetails() {
@@ -156,6 +176,92 @@ class HomeViewModel @Inject constructor(
             _rentDetails.value = null
             _isRentDetailObtained.value = false
         }
+    }
+
+
+    //Map Theme
+
+    private fun Color.toHexString(): String {
+        val alpha = (alpha * 255).toInt()
+        val red = (red * 255).toInt()
+        val green = (green * 255).toInt()
+        val blue = (blue * 255).toInt()
+        return String.format("#%02X%02X%02X%02X", alpha, red, green, blue)
+    }
+
+    fun generateMapStyle(primaryColor: Color, backgroundColor: Color, textColor: Color): String {
+        return """
+    [
+      {
+        "elementType": "geometry",
+        "stylers": [
+          { "color": "${backgroundColor.toHexString()}" }
+        ]
+      },
+      {
+        "elementType": "labels.text.fill",
+        "stylers": [
+          { "color": "${textColor.toHexString()}" }
+        ]
+      },
+      {
+        "elementType": "labels.text.stroke",
+        "stylers": [
+          { "color": "${backgroundColor.copy(alpha = 0.9f).toHexString()}" },
+          { "weight": 2 }
+        ]
+      },
+      {
+        "featureType": "road",
+        "elementType": "geometry",
+        "stylers": [
+          { "color": "${primaryColor.copy(alpha = 0.9f).toHexString()}" }
+        ]
+      },
+      {
+        "featureType": "road",
+        "elementType": "geometry.stroke",
+        "stylers": [
+          { "color": "${primaryColor.copy(alpha = 0.6f).toHexString()}" },
+          { "weight": 1.5 }
+        ]
+      },
+      {
+        "featureType": "road",
+        "elementType": "labels.text.fill",
+        "stylers": [
+          { "color": "${textColor.copy(alpha = 0.95f).toHexString()}" }
+        ]
+      },
+      {
+        "featureType": "road",
+        "elementType": "labels.text.stroke",
+        "stylers": [
+          { "color": "${backgroundColor.copy(alpha = 0.85f).toHexString()}" },
+          { "weight": 2 }
+        ]
+      },
+      {
+        "featureType": "poi",
+        "stylers": [
+          { "visibility": "off" }
+        ]
+      },
+      {
+        "featureType": "transit",
+        "stylers": [
+          { "visibility": "off" }
+        ]
+      },
+      {
+        "featureType": "water",
+        "elementType": "geometry",
+        "stylers": [
+          { "color": "${primaryColor.copy(alpha = 0.3f).toHexString()}" }
+        ]
+      }
+    ]
+    """.trimIndent()
     }
 
 }

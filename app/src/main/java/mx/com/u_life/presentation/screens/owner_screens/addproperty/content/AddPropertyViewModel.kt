@@ -51,7 +51,7 @@ class AddPropertyViewModel @Inject constructor(
     private val fusedLocationClient: FusedLocationProviderClient =
         LocationServices.getFusedLocationProviderClient(application)
 
-    // Flow
+    // types
     private val _types = MutableLiveData<List<PropertyTypeModel>>()
     val types: LiveData<List<PropertyTypeModel>> = _types
 
