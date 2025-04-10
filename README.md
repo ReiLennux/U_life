@@ -53,6 +53,7 @@ Thank you for your interest in our project!
 <p align="left">
     <img src="https://img.shields.io/badge/Kotlin-282C34?logo=kotlin" alt="Kotlin logo" title="Kotlin" height="25" />
     <img src="https://img.shields.io/badge/JetpackCompose-282C34?logo=jetpackcompose" alt="JetpackCompose logo" title="JetpackCompose" height="25" />
+    <img src="https://img.shields.io/badge/Firebase-282C34?logo=firebase" alt="Firebase logo" title="Firebase" height="25" />
     <img src="https://img.shields.io/badge/Google Cloud-282C34?logo=googlecloud" alt="Google Cloud logo" title="Google Cloud" height="25" />
     <img src="https://img.shields.io/badge/Android-282C34?logo=android" alt="Android logo" title="Android" height="25" />
     <img src="https://img.shields.io/badge/Material Design-282C34?logo=materialdesign" alt="Material Design logo" title="Material Design" height="25" />
