@@ -306,7 +306,6 @@ fun PropertyInfo(viewModel: AddPropertyViewModel) {
         selectedText = type,
         isExpanded = isExpanded,
         items = types.convertToGenericCatalog(),
-        onValueChangeAction = { },
         errorMessage = typeError,
         onSelectedItem = {
             viewModel.onEvent(

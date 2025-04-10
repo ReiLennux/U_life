@@ -193,13 +193,19 @@ class Validations @Inject constructor(
 
     // Validación precio
     fun validatePrice(price: String): ValidationResult {
+        if (price.isBlank()) {
+            return ValidationResult(
+                successful = false,
+                errorMessage = "El campo no puede estar vacio."
+            )
+        }
         if (price.toInt() < 100) {
             return ValidationResult(
                 successful = false,
                 errorMessage = "El precio no puede ser menor a $100 MXN."
             )
         }
-        if (price.toInt()  > Int.MAX_VALUE) {
+        if (price.toInt()  >= Int.MAX_VALUE) {
             return ValidationResult(
                 successful = false,
                 errorMessage = "El precio no puede exceder el valor máximo permitido."
