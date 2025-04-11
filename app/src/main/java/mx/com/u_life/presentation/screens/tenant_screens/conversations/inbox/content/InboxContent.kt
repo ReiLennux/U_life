@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -25,9 +26,15 @@ fun InboxContent(
     paddingValues: PaddingValues,
     navController: NavController
 ) {
-    Box{
+    LazyColumn(
+        modifier = modifier
+            .fillMaxSize()
+            .padding(top = 5.dp)
+    ) {
         //EmptyInboxMessage(navController)
-        InboxMessages(navController)
+        item {
+            InboxMessages(navController)
+        }
     }
 }
 
@@ -64,12 +71,14 @@ fun EmptyInboxMessage(navController: NavController){
 
 @Composable
 fun InboxMessages(navController: NavController){
-    ChatOverview(
-        image = R.drawable.fumo,
-        name = "Peluche Chistoso",
-        message = "Hola como estas",
-        onClickMessage = {
-            navController.navigate(Routes.CHAT.name)
-        }
-    )
+    for (i in 1..15) {
+        ChatOverview(
+            image = R.drawable.fumo,
+            name = "Peluche Chistoso",
+            message = "Hola como estas",
+            onClickMessage = {
+                navController.navigate(Routes.CHAT.name)
+            }
+        )
+    }
 }

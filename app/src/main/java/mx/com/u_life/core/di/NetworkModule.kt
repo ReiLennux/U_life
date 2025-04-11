@@ -3,6 +3,7 @@ package mx.com.u_life.core.di
 import androidx.navigation.NavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.messaging.FirebaseMessaging
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -59,6 +60,12 @@ object NetworkModule {
     @Singleton
     fun provideFirebaseAuth(): FirebaseAuth {
         return FirebaseAuth.getInstance()
+    }
+
+    @Provides
+    @Singleton
+    fun provideFirebaseCloudMessaging(): FirebaseMessaging {
+        return FirebaseMessaging.getInstance()
     }
 
 }

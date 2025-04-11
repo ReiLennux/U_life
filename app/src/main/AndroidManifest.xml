@@ -35,5 +35,13 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDPwcr5kZGVb2ae08RMyh1mFCIoKCwX_kY"/>
+
+        <service
+            android:name=".data.network.firebase.MessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
     </application>
 </manifest>

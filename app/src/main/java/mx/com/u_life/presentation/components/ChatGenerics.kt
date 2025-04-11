@@ -3,9 +3,11 @@ package mx.com.u_life.presentation.components
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -27,6 +29,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import mx.com.u_life.R
@@ -96,36 +99,79 @@ fun ChatOverview(
     @DrawableRes image: Int,
     name: String,
     message: String,
+    time: String = "12:00 AM",
+    unreadCount: Int = 0,
     onClickMessage: () -> Unit = {},
-    onClickImage: () -> Unit = {}
-){
+    onClickAvatar: () -> Unit = {}
+) {
     Surface(
-        shape = MaterialTheme.shapes.medium,
-        color = MaterialTheme.colorScheme.surfaceVariant,
-        modifier = modifier.clickable {
-            onClickMessage()
-        }
+        modifier = modifier
+            .fillMaxWidth()
+            .clickable { onClickMessage() },
+        color = MaterialTheme.colorScheme.surface
     ) {
         Row(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(8.dp)
-                .height(50.dp),
-            verticalAlignment = Alignment.CenterVertically,
+                .padding(horizontal = 12.dp, vertical = 10.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
+            // Avatar
             Image(
                 painter = painterResource(id = image),
-                contentDescription = null,
+                contentDescription = "User avatar",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
-                    .size(45.dp)
+                    .size(48.dp)
                     .clip(CircleShape)
-                    .border(BorderStroke(2.dp, MaterialTheme.colorScheme.primary), CircleShape)
+                    .border(2.dp, MaterialTheme.colorScheme.primary, CircleShape)
+                    .clickable { onClickAvatar() }
             )
-            Spacer(modifier = Modifier.width(10.dp))
-            Column {
-                Text(text = name, style = MaterialTheme.typography.titleMedium)
-                Text(text = message, style = MaterialTheme.typography.bodySmall)
+
+            Spacer(modifier = Modifier.width(12.dp))
+
+            // Name and message
+            Column(
+                modifier = Modifier.weight(1f)
+            ) {
+                Text(
+                    text = name,
+                    style = MaterialTheme.typography.titleMedium,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
+                )
+                Text(
+                    text = message,
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
+                )
+            }
+
+            // Time and unread badge
+            Column(
+                horizontalAlignment = Alignment.End
+            ) {
+                Text(
+                    text = time,
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+                Spacer(modifier = Modifier.height(6.dp))
+                if (unreadCount > 0) {
+                    Box(
+                        modifier = Modifier
+                            .background(MaterialTheme.colorScheme.primary, CircleShape)
+                            .padding(horizontal = 8.dp, vertical = 3.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            text = unreadCount.toString(),
+                            style = MaterialTheme.typography.labelSmall,
+                            color = MaterialTheme.colorScheme.onPrimary
+                        )
+                    }
+                }
             }
         }
     }
@@ -137,6 +183,9 @@ fun ChatOverviewPreview() {
     ChatOverview(
         image = R.drawable.fumo,
         name = "Peluche Chistoso",
-        message = "Hola, como estas?"
+        message = "Hola, como estas?",
+        onClickMessage = {},
+        onClickAvatar = {},
+        unreadCount = 2
     )
 }

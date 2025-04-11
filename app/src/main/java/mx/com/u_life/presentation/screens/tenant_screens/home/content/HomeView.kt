@@ -44,6 +44,8 @@ fun HomeView(
                     viewModel.assignRentsResult(result.data)
 
                 }
+
+                else -> {}
             }
         }
     }
@@ -64,8 +66,7 @@ fun HomeView(
                 }
                 Response.Loading ->{
                 }
-                null -> {
-                }
+                else -> {}
             }
 
         }

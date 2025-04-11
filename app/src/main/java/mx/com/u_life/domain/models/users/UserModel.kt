@@ -4,8 +4,8 @@ data class UserModel(
     val id: String = "",
     val name: String = "",
     val email: String = "",
-    val userType: String = ""
+    val userType: String = "",
+    val fcmToken: String? = null
 ) {
-    // Constructor para Firebase
-    constructor() : this("", "", "", "")
+    constructor() : this("", "", "", "", null)
 }

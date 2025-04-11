@@ -29,10 +29,8 @@ fun MainScreenView(
                 Response.Loading ->{
                     println("cargando...")
                 }
-                null -> {
-                }
+                else -> {}
             }
-
         }
     }
 }

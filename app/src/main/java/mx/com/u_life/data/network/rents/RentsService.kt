@@ -5,6 +5,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.storage
 import kotlinx.coroutines.tasks.await
+import mx.com.u_life.core.constants.Constants
 import mx.com.u_life.domain.models.Response
 import mx.com.u_life.domain.models.rents.RentLocationModel
 import mx.com.u_life.domain.models.rents.RentModel
@@ -17,16 +18,16 @@ class RentsService @Inject constructor(
 
     suspend fun getAllRents(): Response<List<RentLocationModel>> {
         return try {
-            val rentList = _fireStore.collection("Rentas")
+            val rentList = _fireStore.collection(Constants.RENTS_COLLECTION)
                 .get()
                 .await()
                 .documents
                 .mapNotNull { document ->
-                    val name = document.getString("name")
-                    val latitude = document.getDouble("location.latitude")
-                    val longitude = document.getDouble("location.longitude")
+                    val name = document.getString(Constants.RENT_FIELD_NAME)
+                    val latitude = document.getDouble(Constants.RENT_LOCATION_LATITUDE)
+                    val longitude = document.getDouble(Constants.RENT_LOCATION_LONGITUDE)
                     val id = document.id
-                    val type = document.getString("type")
+                    val type = document.getString(Constants.RENT_FIELD_TYPE)
 
                     if (latitude != null && longitude != null) {
                         RentLocationModel(id = id, latitude = latitude, longitude = longitude, name = name ?: "", type = type!! )
@@ -43,7 +44,7 @@ class RentsService @Inject constructor(
 
     suspend fun getRentDetails(rentId: String): Response<RentModel> {
         return try {
-            val rentDetails = _fireStore.document("Rentas/$rentId")
+            val rentDetails = _fireStore.document("${Constants.RENTS_COLLECTION}/$rentId")
                 .get()
                 .await()
                 .toObject(RentModel::class.java)
@@ -61,7 +62,7 @@ class RentsService @Inject constructor(
     suspend fun postRent(rent: TemporalRentModel): Response<Boolean> {
         FirebaseAuth.getInstance().currentUser ?: return Response.Error(Exception("User is not authenticated"))
 
-        val storageRef = Firebase.storage.reference.child("Photos").child(rent.ownerId!!)
+        val storageRef = Firebase.storage.reference.child(Constants.STORAGE_PHOTOS).child(rent.ownerId!!)
         val uploadedImageUrls = mutableListOf<String>()
 
         rent.images.forEachIndexed { _, imageUri ->
@@ -90,7 +91,7 @@ class RentsService @Inject constructor(
         )
 
         return try {
-            _fireStore.collection("Rentas")
+            _fireStore.collection(Constants.RENTS_COLLECTION)
                 .add(finalRent)
                 .await()
             Response.Success(true)
@@ -101,8 +102,8 @@ class RentsService @Inject constructor(
 
     suspend fun getMyRents(ownerId: String): Response<List<RentModel>> {
         return try {
-            val rentList = _fireStore.collection("Rentas")
-                .whereEqualTo("ownerId", ownerId)
+            val rentList = _fireStore.collection(Constants.RENTS_COLLECTION)
+                .whereEqualTo(Constants.RENT_FIELD_OWNERID, ownerId)
                 .get()
                 .await()
 

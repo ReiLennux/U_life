@@ -30,8 +30,7 @@ fun AddPropertyView(
                 }
                 Response.Loading ->{
                 }
-                null -> {
-                }
+                else -> {}
             }
 
         }

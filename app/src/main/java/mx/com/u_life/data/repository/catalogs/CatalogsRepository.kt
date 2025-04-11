@@ -1,6 +1,7 @@
 package mx.com.u_life.data.repository.catalogs
 
 import com.google.firebase.firestore.QuerySnapshot
+import mx.com.u_life.core.constants.Constants
 import mx.com.u_life.data.network.catalogs.CatalogsService
 import mx.com.u_life.domain.models.Response
 import mx.com.u_life.domain.models.generic.GenericCatalogModel
@@ -27,7 +28,7 @@ class CatalogsRepository @Inject constructor(
 private fun QuerySnapshot.convertToGenericCatalog(): List<PropertyTypeModel> {
     return this.documents.map { document ->
         val id = document.id
-        val name = document.getString("name") ?: "Unknown"
+        val name = document.getString(Constants.RENT_FIELD_NAME) ?: "Unknown"
         PropertyTypeModel(id = id, name = name)
     }
 }

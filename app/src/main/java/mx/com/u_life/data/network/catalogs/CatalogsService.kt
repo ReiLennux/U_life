@@ -3,6 +3,7 @@ package mx.com.u_life.data.network.catalogs
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
 import kotlinx.coroutines.suspendCancellableCoroutine
+import mx.com.u_life.core.constants.Constants
 import javax.inject.Inject
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
@@ -13,7 +14,7 @@ class CatalogsService @Inject constructor(
     suspend fun getPropertiesType(): QuerySnapshot {
         return try {
             suspendCancellableCoroutine { continuation ->
-                _fireStore.collection("ComCatPropertyType").get()
+                _fireStore.collection(Constants.PROPERTY_TYPE).get()
                     .addOnSuccessListener { result ->
                         continuation.resume(result)
                     }

@@ -49,9 +49,7 @@ fun HomeView(
                         icon = Icons.Filled.Clear
                     )
                 }
-                null -> {
-
-                }
+                else -> {}
             }
             }
     }

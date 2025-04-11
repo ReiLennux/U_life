@@ -1,16 +1,24 @@
 package mx.com.u_life.core.di
 
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.FirebaseFirestoreSettings
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import mx.com.u_life.data.repository.catalogs.CatalogsRepository
+import mx.com.u_life.data.repository.chat.ChatRepository
 import mx.com.u_life.data.repository.dataStore.DataStoreRepository
 import mx.com.u_life.data.repository.firebase.FireAuthRepository
 import mx.com.u_life.data.repository.rents.RentsRepository
 import mx.com.u_life.data.repository.user.UserRepository
 import mx.com.u_life.domain.useCases.catalogs.CatalogsUseCases
 import mx.com.u_life.domain.useCases.catalogs.GetPropertiesType
+import mx.com.u_life.domain.useCases.chat.ChatUseCases
+import mx.com.u_life.domain.useCases.chat.CreateOrGetChat
+import mx.com.u_life.domain.useCases.chat.ListenForMessages
+import mx.com.u_life.domain.useCases.chat.ListenForUserChats
+import mx.com.u_life.domain.useCases.chat.SendMessage
 import mx.com.u_life.domain.useCases.dataStore.DataStoreUseCases
 import mx.com.u_life.domain.useCases.dataStore.GetDataBoolean
 import mx.com.u_life.domain.useCases.dataStore.GetDataInt
@@ -75,5 +83,15 @@ object AppModule {
             getRentDetails = GetRentDetails(rentsRepository),
             postRent = PostRent(rentsRepository),
             getMyRents = GetMyRents(rentsRepository)
+        )
+
+    @Singleton
+    @Provides
+    fun provideChatUseCases(chatRepository: ChatRepository): ChatUseCases =
+        ChatUseCases(
+            createOrGetChat = CreateOrGetChat(chatRepository),
+            sendMessage = SendMessage(chatRepository),
+            listenForMessages = ListenForMessages(chatRepository),
+            listenForUserChats = ListenForUserChats(chatRepository)
         )
 }
