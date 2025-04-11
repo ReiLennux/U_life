@@ -29,6 +29,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.core.content.ContextCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
@@ -166,7 +167,7 @@ fun UbicationPermissions(
                 locationPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
             }
         ) {
-            Text(text = "Otorgar permisos")
+            Text(text = stringResource(id = R.string.permissions_generic_button))
         }
     }
 }

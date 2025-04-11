@@ -53,6 +53,10 @@
     <!-- StringResources for permissions-->
     <string name="permissions_location_title">Por favor, otorga los permisos de ubicación.</string>
     <string name="permissions_location">U-life, necesita tu ubicacion para las funciones principales de la aplicacion</string>
+    <string name="permissions_camera_title">Por favor, otorga los permisos de camara.</string>
+    <string name="permissions_camera">U-life, necesita tu camara para escanear tu documentacion</string>
+
+    <string name="permissions_generic_button">Otorgar permisos</string>"
 
     <!--StringResources for profileScreen-->
     <string name="notification_option_title">Notificaciones de la aplicación</string>
@@ -97,5 +101,12 @@
 
     <!-- Generic StringResources for Services-->
     <string name="generic_error_1">Ocurrio un error al obtener la informacion solicitada</string>"
+
+
+    <!--Generic StringResources for Verification-->
+    <string name="verification_title">Bienvenido al centro de verificación de U-life</string>
+    <string name="verification_description">En U-life nos queremos asegurar de que todos nuestros usuarios cumplas con nuestras normas para garantizar una comunidad solidaria y confiable</string>
+    <string name="verification_dialog_title">Usuario Verificado</string>"
+    <string name="verification_dialog_description">Gracias por ayudarnos a ser U-life una experiencia más agradable</string>
 
 </resources>

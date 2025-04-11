@@ -235,7 +235,7 @@ fun BodyOptions(navController: NavController) {
                         tint = MaterialTheme.colorScheme.primary
                     )
                 },
-                click = {/*TODO: Navigate to verify profile screen*/ }
+                click = { navController.navigate(Routes.VERIFY_PROFILE.name) }
             )
             OptionItem(
                 title = R.string.Info_option_title,

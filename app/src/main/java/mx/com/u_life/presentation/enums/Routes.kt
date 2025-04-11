@@ -6,5 +6,6 @@ enum class Routes {
     INBOX,
     PROFILE,
     LOGIN,
-    SIGN_UP
+    SIGN_UP,
+    VERIFY_PROFILE
 }

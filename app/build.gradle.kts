@@ -146,4 +146,10 @@ dependencies {
     implementation (libs.coil.compose.v222)
     implementation (libs.androidx.activity.compose.v131)
 
+    //Camera
+    implementation (libs.androidx.camera.core)
+    implementation (libs.androidx.camera.camera2)
+    implementation (libs.androidx.camera.view)
+    implementation (libs.androidx.camera.lifecycle)
+    implementation (libs.text.recognition)
 }
