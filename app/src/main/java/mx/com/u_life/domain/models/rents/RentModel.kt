@@ -4,6 +4,7 @@ import android.net.Uri
 
 data class RentModel(
     val ownerId : String? = "",
+    val ownerName: String? = "",
     val name: String = "",
     val description: String = "",
     val price: Int = 0,
@@ -17,6 +18,7 @@ data class RentModel(
 
 data class TemporalRentModel(
     val ownerId : String? = "",
+    val ownerName: String? = "",
     val name: String = "",
     val description: String = "",
     val price: Int = 0,

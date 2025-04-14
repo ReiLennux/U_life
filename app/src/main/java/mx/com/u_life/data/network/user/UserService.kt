@@ -17,7 +17,6 @@ class UserService @Inject constructor(
                 .get()
                 .await()
             val user = documentSnapshot.toObject(UserModel::class.java)
-            println(user)
             if (user != null) {
                 Response.Success(user)
             } else {

@@ -132,7 +132,7 @@ val navigationItems = listOf(
     ),
     NavigationItems(
         title = "Chats",
-        route = Routes.INBOX.name,
+        route = Routes.CHAT.name,
         selectedIcon = Icons.Filled.ChatBubble,
         unselectedIcon = Icons.Outlined.ChatBubbleOutline,
         hasNews = false,

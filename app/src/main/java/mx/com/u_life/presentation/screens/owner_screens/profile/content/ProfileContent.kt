@@ -42,6 +42,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -53,6 +54,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import kotlinx.coroutines.launch
 import mx.com.u_life.R
 
 @Composable
@@ -306,9 +308,9 @@ fun LogOut(
     navController: NavController,
     viewModel: ProfileViewModel
 ){
+    val scope = rememberCoroutineScope()
     Row(
         modifier = Modifier
-            .padding(vertical = 16.dp)
             .height(32.dp)
     ){
         Column(
@@ -321,7 +323,10 @@ fun LogOut(
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.error,
                 modifier = Modifier.clickable {
-                    viewModel.logOut()
+                    scope.launch {
+                        viewModel.logOut()
+
+                    }
                     /*TODO: Navigate to students home screen*/
                     //navController.navigate(Routes.LOGIN.name)
                 }

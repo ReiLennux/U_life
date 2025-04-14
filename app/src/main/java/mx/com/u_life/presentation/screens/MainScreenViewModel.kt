@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import mx.com.u_life.core.constants.Constants.USER_EMAIL
+import mx.com.u_life.core.constants.Constants.USER_FIELD_FCMTOKEN
 import mx.com.u_life.core.constants.Constants.USER_NAME
 import mx.com.u_life.core.constants.Constants.USER_TYPE
 import mx.com.u_life.core.constants.Constants.USER_UID
@@ -72,6 +73,7 @@ class MainScreenViewModel @Inject constructor(
         _dataStoreUseCases.setDataString.invoke(USER_UID, user.id)
         _dataStoreUseCases.setDataString.invoke(USER_NAME, user.name)
         _dataStoreUseCases.setDataString.invoke(USER_EMAIL, user.email)
+        _dataStoreUseCases.setDataString.invoke(USER_FIELD_FCMTOKEN, user.fcmToken ?: "")
     }
 
     fun resetInitialState(){

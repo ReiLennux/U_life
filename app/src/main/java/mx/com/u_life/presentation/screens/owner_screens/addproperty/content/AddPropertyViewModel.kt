@@ -26,11 +26,13 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
+import mx.com.u_life.core.constants.Constants.USER_NAME
 import mx.com.u_life.domain.models.Response
 import mx.com.u_life.domain.models.properties.PropertyTypeModel
 import mx.com.u_life.domain.models.rents.LocationModel
 import mx.com.u_life.domain.models.rents.TemporalRentModel
 import mx.com.u_life.domain.useCases.catalogs.CatalogsUseCases
+import mx.com.u_life.domain.useCases.dataStore.DataStoreUseCases
 import mx.com.u_life.domain.useCases.rents.RentsUseCases
 import mx.com.u_life.presentation.utils.Validations
 import java.util.Locale
@@ -43,6 +45,7 @@ class AddPropertyViewModel @Inject constructor(
     private val _rentUseCases: RentsUseCases,
     private val _validations: Validations,
     private val _fireAuth: FirebaseAuth,
+    private val _dataStoreUseCases: DataStoreUseCases
 ): ViewModel() {
     // Flow
     private val _isLoading = MutableStateFlow<Response<Boolean>?>(value = null)
@@ -229,6 +232,7 @@ class AddPropertyViewModel @Inject constructor(
     private suspend fun postProperty() = viewModelScope.async {
         val temporalRent = TemporalRentModel  (
                 ownerId = _fireAuth.currentUser!!.uid,
+                ownerName = _dataStoreUseCases.getDataString.invoke(USER_NAME),
                 name = _propertyName.value!!,
                 description = _propertyDescription.value!!,
                 price = _propertyPrice.value!!.toInt(),

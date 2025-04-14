@@ -6,6 +6,4 @@ data class UserModel(
     val email: String = "",
     val userType: String = "",
     val fcmToken: String? = null
-) {
-    constructor() : this("", "", "", "", null)
-}
+)

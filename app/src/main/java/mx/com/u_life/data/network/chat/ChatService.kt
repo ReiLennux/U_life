@@ -23,15 +23,22 @@ class ChatService @Inject constructor(
         val chatRef = chatsCollection.document(chatId)
         val snapshot = chatRef.get().await()
 
-        if (!snapshot.exists()) {
-            val newChat = ChatModel(
-                id = chatId,
-                participants = listOf(userA, userB),
-                lastMessage = "",
-                lastTimestamp = System.currentTimeMillis()
-            )
-            chatRef.set(newChat).await()
-        }
+//        if (!snapshot.exists()) {
+//            val unreadCounts = mapOf(
+//                userA to 0,
+//                userB to 0
+//            )
+//
+////            val newChat = ChatModel(
+////                id = chatId,
+////                participants = listOf(userA, userB),
+////                lastMessage = "",
+////                lastTimestamp = System.currentTimeMillis(),
+////                unreadCounts = unreadCounts
+////            )
+//
+//            chatRef.set(newChat).await()
+//        }
         return chatId
     }
 

@@ -4,36 +4,28 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
 import mx.com.u_life.R
-import mx.com.u_life.presentation.components.DialogWithIcon
-import mx.com.u_life.presentation.enums.Routes
-import mx.com.u_life.presentation.screens.tenant_screens.conversations.inbox.content.InboxContent
+import mx.com.u_life.presentation.components.ChatName
+import mx.com.u_life.presentation.screens.tenant_screens.conversations.inbox.content.ChatContent
 
 @Composable
 fun InboxScreen(
     navController: NavController,
-    isLoggedIn: Boolean
 ) {
     Scaffold(
+        topBar = {
+            ChatName(
+                image = R.drawable.fumo,
+                name = "Peluche Chistoso",
+                onClickBack = {
+                    navController.popBackStack()
+                }
+            )
+        },
         content = { innerPadding ->
-            if (isLoggedIn){
-                InboxContent(paddingValues = innerPadding, navController = navController)
-            } else {
-                DialogWithIcon(
-                    onDismissRequest = {
-                        navController.popBackStack()
-                    },
-                    onConfirmation = {
-                        navController.navigate(Routes.LOGIN.name) {
-                            popUpTo(navController.graph.startDestinationId) {
-                                inclusive = false
-                            }
-                        }
-                    },
-                    dialogTitle = R.string.auth_dialog_tittle,
-                    dialogText = R.string.auth_dialog_body,
-                    icon = R.drawable.ic_login
-                )
-            }
+            ChatContent(paddingValues = innerPadding, navController = navController)
+        },
+        bottomBar = {
+
         }
     )
 }

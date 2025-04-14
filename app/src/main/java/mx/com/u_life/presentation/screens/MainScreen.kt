@@ -56,12 +56,12 @@ fun MainScreen() {
 
             Scaffold(
                 topBar = {
-                    if (currentRoute != Routes.CHAT.name) {
+                    if (currentRoute != Routes.INBOX.name) {
                         TopAppBar(visible = viewModel.verifyRouteTop(currentRoute = currentRoute))
                     }
                 },
                 bottomBar = {
-                    if (currentRoute != Routes.CHAT.name) {
+                    if (currentRoute != Routes.INBOX.name) {
                         BottomNavBar(navController, visible = viewModel.verifyRouteBottom(currentRoute = currentRoute))
                     }
                 }

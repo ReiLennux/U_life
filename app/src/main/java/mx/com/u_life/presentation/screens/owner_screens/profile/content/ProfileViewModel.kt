@@ -6,8 +6,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import mx.com.u_life.core.constants.Constants.USER_EMAIL
+import mx.com.u_life.core.constants.Constants.USER_FIELD_FCMTOKEN
 import mx.com.u_life.core.constants.Constants.USER_NAME
 import mx.com.u_life.core.constants.Constants.USER_TYPE
 import mx.com.u_life.core.constants.Constants.USER_UID
@@ -36,13 +38,14 @@ class ProfileViewModel @Inject constructor(
         }
     }
 
-    fun logOut(){
-        viewModelScope.launch {
+    suspend fun logOut(){
+        viewModelScope.async {
             _dataStoreUseCases.setDataString.invoke(USER_TYPE, "")
             _dataStoreUseCases.setDataString.invoke(USER_UID, "")
             _dataStoreUseCases.setDataString.invoke(USER_NAME, "")
             _dataStoreUseCases.setDataString.invoke(USER_EMAIL, "")
+            _dataStoreUseCases.setDataString.invoke(USER_FIELD_FCMTOKEN, "")
             _fireAuth.signOut()
-        }
+        }.await()
     }
 }

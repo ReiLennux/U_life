@@ -79,6 +79,7 @@ class RentsService @Inject constructor(
 
         val finalRent = RentModel(
             ownerId = rent.ownerId,
+            ownerName = rent.ownerName,
             name = rent.name,
             description = rent.description,
             price = rent.price,
